@@ -16,3 +16,7 @@ def train(request):
 def test(request):
 	# print "HALO"
 	return render(request, 'test.html')
+def popup_face_rec(request):
+	import facerec_from_webcam_faster_python3
+	print ("ss")
+	return HttpResponse("sss")

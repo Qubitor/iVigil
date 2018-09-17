@@ -22,9 +22,7 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-	url(r'^iSee/', include('iSee.urls', namespace='iSee')),
-	# url(r'^train',train,name="train"),
-	# url(r'^test',test,name="test"),
+	url(r'^iSee/', include(('iSee.urls','iSee'), namespace='iSee')),
     url(r'^$', TemplateView.as_view(template_name='base.html'), name='iSee.urls'),
 
 ]
