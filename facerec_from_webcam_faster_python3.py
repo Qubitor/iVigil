@@ -97,9 +97,9 @@ while True:
 		insert.create_new_user(id,current_time)
 
 		# os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem  WARNING !!!!" "safe_quit"'%())
-		os.system(' telegram-cli -k server.pub -W -e "msg Hilaal_Alam WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
-		os.system(' telegram-cli -k server.pub -W -e "send_photo Hilaal_Alam %s" "safe_quit"' %(filename) )
-		os.system(' telegram-cli -k server.pub -W -e "msg Hilaal_Alam NEW USER_ID: %s " "safe_quit" '%(id))
+		os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
+		os.system(' telegram-cli -k server.pub -W -e "send_photo Alertsystem %s" "safe_quit"' %(filename) )
+		os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem NEW USER_ID: %s " "safe_quit" '%(id))
 
 		print (id)
 		data=select.select_user(id)
