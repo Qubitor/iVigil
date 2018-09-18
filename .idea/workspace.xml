@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0e1ff35-5fc1-48d0-9f5d-0b327f2e2c0d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iSee/facerec_from_webcam_faster_python3.py" beforeDir="false" afterPath="$PROJECT_DIR$/iSee/facerec_from_webcam_faster_python3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_data/6528381.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_data/obama.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iSee/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/iSee/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iSee/templates/train.html" beforeDir="false" afterPath="$PROJECT_DIR$/iSee/templates/train.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +18,9 @@
           <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -38,13 +37,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="319" />
+          <entry key="html" value="422" />
           <entry key="py" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="319" />
+          <entry key="HTML" value="422" />
           <entry key="Python" value="81" />
         </counts>
       </usages-collector>
@@ -55,7 +54,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iVigil/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
+            <state relative-caret-position="1305">
               <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
             </state>
           </provider>
@@ -70,22 +69,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/iSee/facerec_from_webcam_faster_python3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iSee/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
+            <state relative-caret-position="90">
               <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -97,7 +84,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iVigil/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
+            <state relative-caret-position="300">
               <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
             </state>
           </provider>
@@ -106,45 +93,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iSee/templates/test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="1635">
               <caret line="109" column="88" selection-start-line="109" selection-start-column="88" selection-end-line="109" selection-end-column="88" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/iSee/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+            <state relative-caret-position="15">
+              <caret line="121" column="46" lean-forward="true" selection-start-line="121" selection-start-column="46" selection-end-line="121" selection-end-column="46" />
               <folding>
-                <element signature="e#11060#11066#0" expanded="true" />
-                <element signature="e#11066#11072#0" expanded="true" />
-                <element signature="e#11072#11078#0" expanded="true" />
-                <element signature="e#11078#11084#0" expanded="true" />
-                <element signature="e#11219#11225#0" expanded="true" />
-                <element signature="e#11225#11231#0" expanded="true" />
-                <element signature="e#11231#11237#0" expanded="true" />
-                <element signature="e#11237#11243#0" expanded="true" />
-                <element signature="e#9696#9702#0" expanded="true" />
-                <element signature="e#9702#9708#0" expanded="true" />
-                <element signature="e#9708#9714#0" expanded="true" />
-                <element signature="e#9714#9720#0" expanded="true" />
                 <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#11428#11434#0" expanded="true" />
-                <element signature="e#11434#11440#0" expanded="true" />
-                <element signature="e#11440#11446#0" expanded="true" />
-                <element signature="e#11446#11452#0" expanded="true" />
-                <element signature="e#11502#11508#0" expanded="true" />
-                <element signature="e#11508#11514#0" expanded="true" />
-                <element signature="e#11514#11520#0" expanded="true" />
-                <element signature="e#11558#11564#0" expanded="true" />
-                <element signature="e#11564#11570#0" expanded="true" />
-                <element signature="e#11570#11576#0" expanded="true" />
-                <element signature="e#11665#11671#0" expanded="true" />
-                <element signature="e#11671#11677#0" expanded="true" />
-                <element signature="e#11677#11683#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -152,16 +114,14 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iSee/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-450" />
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iSee/templates/train.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="105" column="124" selection-start-line="105" selection-start-column="124" selection-end-line="105" selection-end-column="124" />
+            <state relative-caret-position="165">
+              <caret line="35" column="101" selection-start-line="35" selection-start-column="101" selection-end-line="35" selection-end-column="101" />
             </state>
           </provider>
         </entry>
@@ -169,7 +129,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iSee/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
+            <state relative-caret-position="240">
               <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
@@ -195,14 +155,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/iSee/templates/test.html" />
-        <option value="$PROJECT_DIR$/iSee/templates/train.html" />
         <option value="$PROJECT_DIR$/iSee/urls.py" />
         <option value="$PROJECT_DIR$/iSee/views.py" />
         <option value="$PROJECT_DIR$/iVigil/urls.py" />
         <option value="$PROJECT_DIR$/iVigil/settings.py" />
         <option value="$PROJECT_DIR$/iSee/DB_funtions.py" />
-        <option value="$PROJECT_DIR$/iSee/templates/base.html" />
         <option value="$PROJECT_DIR$/iSee/facerec_from_webcam_faster_python3.py" />
+        <option value="$PROJECT_DIR$/iSee/templates/train.html" />
+        <option value="$PROJECT_DIR$/iSee/templates/base.html" />
       </list>
     </option>
   </component>
@@ -217,7 +177,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -245,6 +204,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -277,8 +237,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="26" width="1368" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22222222" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22222222" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -289,7 +250,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.33333334" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.335" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -323,39 +284,9 @@
     <entry file="file://$PROJECT_DIR$/iSee/models.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/iSee/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-450" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSee/templates/train.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="105" column="124" selection-start-line="105" selection-start-column="124" selection-end-line="105" selection-end-column="124" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSee/templates/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="109" column="88" selection-start-line="109" selection-start-column="88" selection-end-line="109" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSee/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-            <marker date="1537183110569" expanded="true" signature="451:453" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/iVigil/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
+        <state relative-caret-position="1305">
           <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
         </state>
       </provider>
@@ -367,16 +298,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iVigil/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/iSee/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
+        <state relative-caret-position="90">
           <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -384,38 +308,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iSee/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/iVigil/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+        <state relative-caret-position="300">
+          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iSee/templates/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1635">
+          <caret line="109" column="88" selection-start-line="109" selection-start-column="88" selection-end-line="109" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iSee/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iSee/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
           <folding>
-            <element signature="e#11060#11066#0" expanded="true" />
-            <element signature="e#11066#11072#0" expanded="true" />
-            <element signature="e#11072#11078#0" expanded="true" />
-            <element signature="e#11078#11084#0" expanded="true" />
-            <element signature="e#11219#11225#0" expanded="true" />
-            <element signature="e#11225#11231#0" expanded="true" />
-            <element signature="e#11231#11237#0" expanded="true" />
-            <element signature="e#11237#11243#0" expanded="true" />
-            <element signature="e#9696#9702#0" expanded="true" />
-            <element signature="e#9702#9708#0" expanded="true" />
-            <element signature="e#9708#9714#0" expanded="true" />
-            <element signature="e#9714#9720#0" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#11428#11434#0" expanded="true" />
-            <element signature="e#11434#11440#0" expanded="true" />
-            <element signature="e#11440#11446#0" expanded="true" />
-            <element signature="e#11446#11452#0" expanded="true" />
-            <element signature="e#11502#11508#0" expanded="true" />
-            <element signature="e#11508#11514#0" expanded="true" />
-            <element signature="e#11514#11520#0" expanded="true" />
-            <element signature="e#11558#11564#0" expanded="true" />
-            <element signature="e#11564#11570#0" expanded="true" />
-            <element signature="e#11570#11576#0" expanded="true" />
-            <element signature="e#11665#11671#0" expanded="true" />
-            <element signature="e#11671#11677#0" expanded="true" />
-            <element signature="e#11677#11683#0" expanded="true" />
+            <element signature="e#24#63#0" expanded="true" />
+            <marker date="1537183110569" expanded="true" signature="451:453" ph="..." />
           </folding>
         </state>
       </provider>
@@ -426,6 +342,24 @@
           <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iSee/templates/train.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="35" column="101" selection-start-line="35" selection-start-column="101" selection-end-line="35" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iSee/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="121" column="46" lean-forward="true" selection-start-line="121" selection-start-column="46" selection-end-line="121" selection-end-column="46" />
+          <folding>
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

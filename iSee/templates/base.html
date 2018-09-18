@@ -126,7 +126,7 @@
         <div class="nav-wrapper">
           <a href="#" class="brand-logo center">Facial Recognition</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#">Train</a></li>
+            <li><a href="/iSee/train">Train</a></li>
             <li class="active"><a href="#">Test</a></li>
           </ul>
         </div>
@@ -141,7 +141,7 @@
                                 <a class="btn-floating btn-large waves-effect waves-light red" onclick="snapshot();"><i class="material-icons">touch_app</i></a>
                             </div>
                             <div class="input-field col s6">
-                                    <input placeholder="Enter IP Address" type="text" class="validate" id="ip">
+                                    <input placeholder="Enter IP Address" type="hidden" class="validate" id="ip">
                             </div>
                             <p>
                                 <video onclick="snapshot(this);" width=400 height=300 id="video" controls autoplay></video>
@@ -149,9 +149,6 @@
                                 <canvas  id="myCanvas" width="300" height="220"></canvas>
                             </p>
                     </div>
-                    <audio id="myAudio">
-                            <source src="success.wav" type="audio/wav">
-                    </audio>
 
                   </div>
       </div>
