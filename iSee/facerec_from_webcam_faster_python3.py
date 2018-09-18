@@ -102,7 +102,7 @@ while True:
 
 		print (id)
 		data=select.select_user(id)
-		print ("------------------------------------------------")
+		print ("*"*20)
 		print ("\t\t::USER DISCRIPTIONS::")
 		print ("------------------------------------------------")
 		print ("USER ID  :",data[1])
