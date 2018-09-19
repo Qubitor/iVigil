@@ -2,11 +2,13 @@ import MySQLdb
 con=MySQLdb.connect("localhost","root","","face_rec_data")
 obj=con.cursor()
 class insert:
-  def create_new_user(*data):
+	def create_new_user(*data):
+  		obj.execute("SELECT id from user_info order by id desc limit 1")
+  		ID=obj.fetchone()[0]
+  		obj.execute("INSERT INTO user_info (`user_id`,`time_stamp`) VALUES('%s','%s')" %(ID,data[1]))
+  		con.commit()
 
-    obj.execute("INSERT INTO user_info (`user_id`,`time_stamp`) VALUES('%s','%s')" %(data[1],data[2]))
-    con.commit()   
-    return 1
+  		return ID
 
 class update:
 	def update_time_stamp(*data):

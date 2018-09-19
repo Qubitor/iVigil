@@ -69,8 +69,9 @@ while True:
         else:
             ret, frame = video_capture.read()
         # store the new image with randon name in the directory "img_data/" 
-            id=randint(0,10000000)
-
+            # id=randint(0,10000000)
+            current_time=datetime.now()
+            id=insert.create_new_user(current_time)
             filename='img_data/'+str(id)+'.jpg'
             out = cv2.imwrite(filename, frame)
             # Load a new image and learn how to recognize it.
@@ -81,10 +82,9 @@ while True:
             user_name, ext = os.path.splitext(name[1])
             known_face_names.append(user_name)
             known_face_names.append(filename)
-            current_time=datetime.now()
+            
             print ("new face recognized Time:",current_time)
         #it will insert and update the time stamp of an user's into database
-            insert.create_new_user(id,current_time)
 
             # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem  WARNING !!!!" "safe_quit"'%())
             os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
