@@ -4,7 +4,7 @@ obj=con.cursor()
 class insert:
 	def create_new_user(*data):
   		obj.execute("SELECT id from user_info order by id desc limit 1")
-  		ID=obj.fetchone()[0]
+  		ID=obj.fetchone()[0]+1
   		obj.execute("INSERT INTO user_info (`user_id`,`time_stamp`) VALUES('%s','%s')" %(ID,data[1]))
   		con.commit()
 
