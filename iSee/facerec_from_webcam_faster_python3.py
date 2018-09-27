@@ -99,6 +99,8 @@ while True:
 		os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
 		os.system(' telegram-cli -k server.pub -W -e "send_photo Alertsystem %s" "safe_quit"' %(filename) )
 		os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem NEW USER_ID: %s " "safe_quit" '%(id))
+		os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Accept : http://192.168.10.4:8000/iSee/accept " "safe_quit" ')
+		os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Reject : http://192.168.10.4:8000/iSee/reject " "safe_quit" ')
 
 		print (id)
 		data=select.select_user(id)

@@ -4,7 +4,12 @@ from . import views
 
 urlpatterns = [
 	url(r'^iSee/$', views.base, name='iSee'),
-	url(r'^train',views.train,name="train"),
-	url(r'^test',views.test,name="test"),
+	url(r'^accept/(\w+)/', views.accept, name="accept"),
+	url(r'^reject/(\w+)/', views.reject, name="reject"),
 	url(r'^popup_face_rec',views.popup_face_rec,name="popup_face_rec"),
-	]
+	url(r'^demo',views.demo,name="demo"),
+	url(r'^alert',views.alert,name="alert"),
+
+	url(r'^stream_video$',views.stream_video,name="stream_video"),
+
+]

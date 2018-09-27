@@ -60,7 +60,8 @@
                 <li class="list-group-item"><i class="glyphicon glyphicon-align-justify"></i> <b>SIDE PANEL</b></li>
                 <li class="list-group-item"><input type="text" class="form-control search-query" placeholder="Search Something"></li>
                 <li class="list-group-item"><a href="index.html"><i class="glyphicon glyphicon-home"></i>Dashboard </a></li>
-                <li class="list-group-item"><a href="/iSee/popup_face_rec"><i class="glyphicon glyphicon-th-list"></i>POpup Face recognization</a></li>
+                <li class="list-group-item"><a href="/iSee/stream_video"><i class="glyphicon glyphicon-user"></i>Face Recognition</a></li>
+     <li class="list-group-item"><a href="/iSee/popup_face_rec"><i class="glyphicon glyphicon-user"></i>POP up Face Recognition</a></li>
 
                 <li>
                   <a href="#demo3" class="list-group-item " data-toggle="collapse"><i class="glyphicon glyphicon-certificate"></i>Overviews 3  <span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -118,45 +119,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
-  <body onload="init();">
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../static/js/materialize.min.js"></script>
-    <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo center">Facial Recognition</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/iSee/train">Train</a></li>
-            <li class="active"><a href="#">Test</a></li>
-          </ul>
-        </div>
-      </nav>
 
-      <div class="container">
-            <div class="card center">
-
-                    <div class="card-content">
-                            <div class="card-action">
-                                <a class="btn-floating btn-large waves-effect waves-light red" onclick="startWebcam();"><i class="material-icons">camera</i></a>
-                                <a class="btn-floating btn-large waves-effect waves-light red" onclick="snapshot();"><i class="material-icons">touch_app</i></a>
-                            </div>
-                            <div class="input-field col s6">
-                                    <input placeholder="Enter IP Address" type="hidden" class="validate" id="ip">
-                            </div>
-                            <p>
-                                <video onclick="snapshot(this);" width=400 height=300 id="video" controls autoplay></video>
-                                <br>
-                                <canvas  id="myCanvas" width="300" height="220"></canvas>
-                            </p>
-                    </div>
-
-                  </div>
-      </div>
-                      </div>
                     <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          <h3 class="panel-title">Panel title</h3>
+                          <center><h3 class="panel-title">zVinci</h3></center>
                         </div>
                         <div class="panel-body">
                          <center><img src= '{% static "../static/zVinci.png" %}'  alt="iSee" width="160" height="200"/>
@@ -168,7 +135,7 @@
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          <h3 class="panel-title">Panel title</h3>
+                         <center> <h3 class="panel-title">zIIoT</h3></center>
                         </div>
                         <div class="panel-body">
                           <center><img src= '{% static "../static/zIIoT.png" %}'  alt="Analytics" width="160" height="200"/>
@@ -181,7 +148,7 @@
            <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          <h3 class="panel-title">Panel title</h3>
+                          <center><h3 class="panel-title">zNergy</h3></center>
                         </div>
                         <div class="panel-body">
                          <center>
@@ -199,6 +166,10 @@
                 </div>
 
               </div><!-- panel body -->
+              <BR><br>
+              <BR><br>
+              <BR><br>
+              <BR><br>
                     </div>
 
 </div></div></div>
@@ -221,53 +192,9 @@
             <a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('','bookmarks')"><img alt="Share" src="http://bootflat.github.io/img/share.gif" border="0" /></a>
             <!-- SmartAddon END -->
         </div>
+
         <hr class="dashed" />
-        <div class="row">
-          <div class="col-md-4">
-            <h3>Get involved</h3>
-            <p>Bootflat is hosted on <a href="https://github.com/silverbux/bootflat-admin" target="_blank" rel="external nofollow">GitHub</a> and open for everyone to contribute. Please give us some feedback and join the development!</p>
-          </div>
-          <div class="col-md-4">
-            <h3>Contribute</h3>
-            <p>You want to help us and participate in the development or the documentation? Just fork Bootflat on <a href="https://github.com/silverbux/bootflat-admin" target="_blank" rel="external nofollow">GitHub</a> and send us a pull request.</p>
-          </div>
-          <div class="col-md-4">
-            <h3>Found a bug?</h3>
-            <p>Open a <a href="https://github.com/silverbux/bootflat-admin/issues" target="_blank" rel="external nofollow">new issue</a> on GitHub. Please search for existing issues first and make sure to include all relevant information.</p>
-          </div>
-        </div>
-        <hr class="dashed" />
-        <div class="row">
-          <div class="col-md-6">
-            <h3>Talk to us</h3>
-            <ul>
-              <li>Tweet us at <a href="https://twitter.com" target="_blank">@YourTwitter</a>&nbsp;&nbsp;&nbsp;&nbsp;Email us at <span class="connect">info@yourdomain.com</span></li>
-              <li>
-                <a title="Twitter" href="https://twitter.com" target="_blank" rel="external nofollow"><i class="icon" data-icon="&#xe121"></i></a>
-                <a title="Facebook" href="https://www.facebook.com" target="_blank" rel="external nofollow"><i class="icon" data-icon="&#xe10b"></i></a>
-                <a title="Google+" href="https://plus.google.com/" target="_blank" rel="external nofollow"><i class="icon" data-icon="&#xe110"></i></a>
-                <a title="Github" href="https://github.com/alexquiambao" target="_blank" rel="external nofollow"><i class="icon" data-icon="&#xe10e"></i></a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <!-- Begin MailChimp Signup Form -->
-            <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
-            <div id="mc_embed_signup">
-            <h3 style="margin-bottom: 15px;">Newsletter</h3>
-            <form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate>
-                <input style="margin-bottom: 10px;" type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
-                <span class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary"></span>
-            </form>
-            </div>
-            <!--End mc_embed_signup-->
-          </div>
-        </div>
-        <hr class="dashed" />
-        <div class="copyright clearfix">
-          <p><b>Bootflat</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="getting-started.html">Getting Started</a>&nbsp;&bull;&nbsp;<a href="index.html">Documentation</a>&nbsp;&bull;&nbsp;<a href="https://github.com/Bootflat/Bootflat.UI.Kit.PSD/archive/master.zip">Free PSD</a>&nbsp;&bull;&nbsp;<a href="colors.html">Color Picker</a></p>
-          <p>Code licensed under <a href="http://opensource.org/licenses/mit-license.html" target="_blank" rel="external nofollow">MIT License</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/" rel="external nofollow">CC BY 3.0</a>.</p>
-        </div>
+
       </div>
     </div>
   </body>
