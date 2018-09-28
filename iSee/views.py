@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.http import HttpResponse
-
+from django.core.mail import EmailMessage
 from DB_funtions import select, insert, update
 from django.http import StreamingHttpResponse
 import time
@@ -93,16 +93,21 @@ def stream_response_generator():
 				# name=filename.split('/')
 				# user_name, ext = os.path.splitext(name[2])
 				# known_face_names.append(user_name)
-	            
+				Subject="Alert Message from iVigil (Smart Vigilance Systems)"
+				Body='<html><body>\
+				<a href="http://192.168.10.4:8002/iSee/accept/'+str(id)+'>Accept</a>\
+				</body></html>'
+				email = EmailMessage(Subject, Body, to=['sureshiknow@gmail.com'])
+				email.send()
 				print ("new face recognized Time:",current_time)
 	        #it will insert and update the time stamp of an particular user's into database
 
 	            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem  WARNING !!!!" "safe_quit"'%())
-				os.system(' telegram-cli -k server.pub -W -e "msg Alert WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
-				os.system(' telegram-cli -k server.pub -W -e "send_photo Alert %s" "safe_quit"' %(filename) )
+				# os.system(' telegram-cli -k server.pub -W -e "msg Alert WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
+				# os.system(' telegram-cli -k server.pub -W -e "send_photo Alert %s" "safe_quit"' %(filename) )
 	            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem NEW USER_ID: %s " "safe_quit" '%(id))
-				os.system(' telegram-cli -k server.pub -W -e "msg Alert Accept : http://192.168.10.4:8000/iSee/accept/%s "  "safe_quit" '%(id))
-				os.system(' telegram-cli -k server.pub -W -e "msg Alert Reject : http://192.168.10.4:8000/iSee/reject/%s " "safe_quit" '%(id))
+				# os.system(' telegram-cli -k server.pub -W -e "msg Alert Accept : http://192.168.10.4:8000/iSee/accept/%s "  "safe_quit" '%(id))
+				# os.system(' telegram-cli -k server.pub -W -e "msg Alert Reject : http://192.168.10.4:8000/iSee/reject/%s " "safe_quit" '%(id))
 				print (id)
 				data=select.select_user(id)
 				# print ("*"*60)
@@ -114,6 +119,7 @@ def stream_response_generator():
 				# print ("*"*60,"\n\n\n")
 				# os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem TIME STAMP: %s " "safe_quit" '%(time))
 				name="unknown"
+				# time.sleep(10)
 			face_names.append(name)
 			for (top, right, bottom, left), name in zip(face_locations, face_names):
 				if not name:
@@ -139,20 +145,21 @@ def accept(request,user_id):
 	new_file='img_data/accept_list/'+str(user_id)+'.jpg'
 	exists = os.path.isfile(old_file)
 	insert.accept_user(user_id)
-	if exists:
-		shutil.copy2(old_file, new_file)
-		os.remove('img_data/reject_list/'+str(user_id)+'.jpg')
-		image = face_recognition.load_image_file(new_file)
-		data = face_recognition.face_encodings(image)[0]
-		known_faces.append(data)
-		name=new_file.split('/')
-		print(name)
-		user_name, ext = os.path.splitext(name[2])
-		print (user_name,ext)
-		known_face_names.append(user_name)
-		return HttpResponse("user "+res+" is Accepted Successfully") 
-	else:
-		return HttpResponse("user "+res+" is already accepted or not exits in reject list") 
+	# if exists:
+	shutil.copy2(old_file, new_file)
+	os.remove(old_file)
+	image = face_recognition.load_image_file(new_file)
+	data = face_recognition.face_encodings(image)[0]
+	print(data)
+	known_faces.append(data)
+	name=new_file.split('/')
+	print(name)
+	user_name, ext = os.path.splitext(name[2])
+	print (user_name,ext)
+	known_face_names.append(user_name)
+	return HttpResponse("user "+res+" is Accepted Successfully") 
+	# else:
+		# return HttpResponse("user "+res+" is already accepted or not exits in reject list") 
 def alert(request):
 	waiting_list=[]
 	data=select.select_waiting_list()
