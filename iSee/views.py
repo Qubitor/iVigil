@@ -3,9 +3,12 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponse
 from django.core.mail import EmailMessage
-from DB_funtions import select, insert, update
+# from django.core.mail import EmailMultiAlternatives
+# from django.template.loader import get_template
+# from django.template import Context
 from django.http import StreamingHttpResponse
-import time
+# import time
+from DB_funtions import select, insert, update
 select=select()
 insert=insert()
 update=update()
@@ -18,17 +21,17 @@ import sys
 import numpy
 known_faces = []
 known_face_names = []
-for img in glob.glob("iSee/img_data/accept_list/*.jpg"):
+for img in glob.glob("iSee/static/img_data/accept_list/*.jpg"):
     # Load a sample picture and learn how to recognize it.
     image = face_recognition.load_image_file(img)
     data = face_recognition.face_encodings(image)[0]
     known_faces.append(data)
     name=img.split('/')
-    user_name, ext = os.path.splitext(name[3])
+    user_name, ext = os.path.splitext(name[4])
     known_face_names.append(user_name)
 reject_list_name=[]
 reject_list_face=[]
-image = face_recognition.load_image_file('iSee/img_data/reject_list/obama.jpg')
+image = face_recognition.load_image_file('iSee/static/img_data/reject_list/obama.jpg')
 data = face_recognition.face_encodings(image)[0]
 reject_list_face.append(data)
 reject_list_name.append('rejected')
@@ -51,8 +54,8 @@ def demo(request):
 	return render(request,'stream.html')
 
 def stream_video(request):
-    return StreamingHttpResponse(stream_response_generator(),content_type="multipart/x-mixed-replace;boundary=frame")
-
+	# data=StreamingHttpResponse(stream_response_generator(),content_type="multipart/x-mixed-replace;boundary=frame")
+	return StreamingHttpResponse(stream_response_generator(),content_type="multipart/x-mixed-replace;boundary=frame")
 
 def stream_response_generator():
 	camera_port=0
@@ -93,16 +96,16 @@ def stream_response_generator():
 					if True in match:
 						first_match_index = match.index(True)
 						name = reject_list_name[first_match_index]
-						print ('test:::::::::::::')
+						# print ('test:::::::::::::')
 					else:
 						current_time=datetime.now()
 						id=insert.create_new_user(current_time)
-						filename='iSee/img_data/reject_list/'+id+'.jpg'
+						filename='iSee/static/img_data/reject_list/'+id+'.jpg'
 						out = cv2.imwrite(filename, frame)
 						image = face_recognition.load_image_file(filename)
 						data = face_recognition.face_encodings(image)[0]
 						reject_list_face.append(data)
-						reject_list_name.append('rejected')
+						reject_list_name.append(id)
 						# gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
 						# faces=face_cascade.detectMultiScale(gray,1.3,5)
 						# for (top, right, bottom, left) in faces:
@@ -116,32 +119,21 @@ def stream_response_generator():
 						# user_name, ext = os.path.splitext(name[2])
 						# known_face_names.append(user_name)
 						Subject="Alert Message from iVigil (Smart Vigilance Systems)"
-						Body='<html><body>\
-						<a href="http://192.168.10.11:8000/iSee/accept/'+str(id)+'>Accept</a>\
-						</body></html>'
+						Body="http://192.168.10.11:8000/iSee/accept/"+str(id)
+						Body=Body+"    http://192.168.10.11:8000/iSee/reject/"+str(id)
 						email = EmailMessage(Subject, Body, to=['sureshiknow@gmail.com'])
 						email.send()
 						print ("new face recognized Time:",current_time)
 	        #it will insert and update the time stamp of an particular user's into database
 
 			            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem  WARNING !!!!" "safe_quit"'%())
-						os.system(' telegram-cli -k server.pub -W -e "msg Alert WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
-						os.system(' telegram-cli -k server.pub -W -e "send_photo Alert %s" "safe_quit"' %(filename) )
-			            # os.system(' telegram-cli -k server.pub -W -e "msg Alert NEW USER_ID: %s " "safe_quit" '%(id))
-						os.system(' telegram-cli -k server.pub -W -e "msg Alert Accept : http://192.168.10.11:8000/iSee/accept/%s "  "safe_quit" '%(id))
-						os.system(' telegram-cli -k server.pub -W -e "msg Alert Reject : http://192.168.10.11:8000/iSee/reject/%s " "safe_quit" '%(id))
-						# print (id)
+						# os.system(' telegram-cli -k server.pub -W -e "msg Alert WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
+						# os.system(' telegram-cli -k server.pub -W -e "send_photo Alert %s" "safe_quit"' %(filename) )
+			   #          # os.system(' telegram-cli -k server.pub -W -e "msg Alert NEW USER_ID: %s " "safe_quit" '%(id))
+						# os.system(' telegram-cli -k server.pub -W -e "msg Alert Accept : http://192.168.10.11:8000/iSee/accept/%s "  "safe_quit" '%(id))
+						# os.system(' telegram-cli -k server.pub -W -e "msg Alert Reject : http://192.168.10.11:8000/iSee/reject/%s " "safe_quit" '%(id))
+						# # print (id)
 						data=select.select_user(id)
-				# print ("*"*60)
-				# print ("\t\t::USER DISCRIPTIONS::")
-				# print ("*"*60)
-				# print ("USER ID:\t\t\t",data[1])
-				# time=str(data[2])
-				# print ("RECOGNIZED TIME :",time[11:],time[0:11])
-				# print ("*"*60,"\n\n\n")
-				# os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem TIME STAMP: %s " "safe_quit" '%(time))
-				# name="unknown"
-				# time.sleep(10)
 			face_names.append(name)
 			for (top, right, bottom, left), name in zip(face_locations, face_names):
 				if not name:
@@ -163,22 +155,24 @@ def accept(request,user_id):
 	# print "HALO"
 	res=user_id
 	import shutil
-	old_file='iSee/img_data/reject_list/'+str(user_id)+'.jpg'
-	new_file='iSee/img_data/accept_list/'+str(user_id)+'.jpg'
+	id=insert.accept_user(user_id)
+	old_file='iSee/static/img_data/reject_list/'+"rejtd_"+str(id)+'.jpg'
+	new_file='iSee/static/img_data/accept_list/id_'+str(id)+'.jpg'
 	exists = os.path.isfile(old_file)
-	insert.accept_user(user_id)
 	# if exists:
 	shutil.copy2(old_file, new_file)
 	os.remove(old_file)
 	image = face_recognition.load_image_file(new_file)
 	data = face_recognition.face_encodings(image)[0]
-	print(data)
 	known_faces.append(data)
 	name=new_file.split('/')
-	print(name)
-	user_name, ext = os.path.splitext(name[3])
-	print (user_name,ext)
+	# print(name)
+	user_name, ext = os.path.splitext(name[4])
+	# print (user_name,ext)
 	known_face_names.append(user_name)
+	print('*'*60)
+	print("a New User is Accepted with id "+ str(user_name) +" by *admin* ")
+	print('*'*60)
 	return HttpResponse("user "+res+" is Accepted Successfully") 
 	# else:
 		# return HttpResponse("user "+res+" is already accepted or not exits in reject list") 
@@ -194,6 +188,8 @@ def alert(request):
 def reject(request,user_id):
 	# print "HALO"
 	res=user_id
+	file="iSee/static/img_data/reject_list/"+str(user_id)+'.jpg'
+	os.remove(file)
 	return HttpResponse(res+"Rejected")
 
 
@@ -224,7 +220,7 @@ def popup_face_rec(request):
 
 	    known_faces.append(data)
 	    name=img.split('/')
-	    user_name, ext = os.path.splitext(name[2])
+	    user_name, ext = os.path.splitext(name[4])
 	    known_face_names.append(user_name)
 
 	# Initialize some variables
@@ -255,7 +251,7 @@ def popup_face_rec(request):
 	        if True in match:
 	            first_match_index = match.index(True)
 	            name = known_face_names[first_match_index]
-	            print (name)
+	            # print (name)
 	            data=select.select_user(name)
 	            print("sss::::;",name)
 	            print(data)
@@ -274,7 +270,7 @@ def popup_face_rec(request):
 	            # id=randint(0,10000000)
 	            current_time=datetime.now()
 	            id=insert.create_new_user(current_time)
-	            filename='img_data/reject_list/'+str(id)+'.jpg'
+	            filename='iSee/static/img_data/reject_list/'+str(id)+'.jpg'
 	            gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
 	            faces=face_cascade.detectMultiScale(gray,1.3,5)
 	            for (top, right, bottom, left) in faces:
@@ -286,8 +282,8 @@ def popup_face_rec(request):
 	            # data = face_recognition.face_encodings(image)[0]
 	            # known_faces.append(data)
 	            name=filename.split('/')
-	            print(name)
-	            user_name, ext = os.path.splitext(name[1])
+	            # print(name)
+	            user_name, ext = os.path.splitext(name[4])
 	            # known_face_names.append(user_name)
 	            
 	            print ("new face recognized Time:",current_time)
