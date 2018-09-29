@@ -32,9 +32,15 @@ class select:
 
 	def select_waiting_list(*data):
 
-		obj.execute("SELECT *from reject_list ")
+		obj.execute("SELECT * from reject_list WHERE id!='%s' ;" %(1))
 		data=obj.fetchall();
 		return data
+
+class delete:
+	def del_reject_list(*data):
+		# print(data[0])
+		obj.execute("DELETE  FROM reject_list WHERE user_id='%s' ;" %(data[0]))
+		con.commit()
 
 
 if __name__=="__main__":

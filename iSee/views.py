@@ -8,7 +8,7 @@ from django.core.mail import EmailMessage
 # from django.template import Context
 from django.http import StreamingHttpResponse
 # import time
-from DB_funtions import select, insert, update
+from DB_funtions import select, insert, update,delete
 select=select()
 insert=insert()
 update=update()
@@ -158,6 +158,8 @@ def accept(request,user_id):
 	id=insert.accept_user(user_id)
 	old_file='iSee/static/img_data/reject_list/'+"rejtd_"+str(id)+'.jpg'
 	new_file='iSee/static/img_data/accept_list/id_'+str(id)+'.jpg'
+	print("ssssss",id)
+	delete.del_reject_list("rejtd_"+str(id))
 	exists = os.path.isfile(old_file)
 	# if exists:
 	shutil.copy2(old_file, new_file)
@@ -188,6 +190,10 @@ def alert(request):
 def reject(request,user_id):
 	# print "HALO"
 	res=user_id
+	for i in range(0,len(reject_list_name)):
+		if reject_list_name[i] == user_id:
+			reject_list_name[i]="Rejected"
+
 	file="iSee/static/img_data/reject_list/"+str(user_id)+'.jpg'
 	os.remove(file)
 	return HttpResponse(res+"Rejected")
