@@ -1,7 +1,7 @@
 ﻿{% if data %}
 {% for i in data %}
 user ID:<b>{{i.id}}</b><br>
-<img height='30%' widht='30%'src="http://192.168.10.11:8000/static/img_data/reject_list/{{i.id}}.jpg">
+<img height='30%' widht='30%'src="http://192.168.10.11:8000/static/img_data/wait_list/{{i.id}}.jpg">
 <button class="button button1"><a style="text-decoration:none" href="http://192.168.10.11:8000/iSee/accept/{{i.id}}">Accept</a></button>
 <button class="button button3"><a style="text-decoration:none"  href="http://192.168.10.11:8000/iSee/reject/{{i.id}}">Reject</a></button>
 <hr>

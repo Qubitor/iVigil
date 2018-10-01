@@ -31,12 +31,25 @@ for img in glob.glob("iSee/static/img_data/accept_list/*.jpg"):
     name=img.split('/')
     user_name, ext = os.path.splitext(name[4])
     known_face_names.append(user_name)
-reject_list_name=[]
-reject_list_face=[]
-image = face_recognition.load_image_file('iSee/static/img_data/reject_list/obama.jpg')
-data = face_recognition.face_encodings(image)[0]
-reject_list_face.append(data)
-reject_list_name.append('rejected')
+rejected_faces = []
+rejected_face_names = []
+for img in glob.glob("iSee/static/img_data/reject_list/*.jpg"):
+    # Load a sample picture and learn how to recognize it.
+    image = face_recognition.load_image_file(img)
+    data = face_recognition.face_encodings(image)[0]
+    rejected_faces.append(data)
+    name=img.split('/')
+    user_name, ext = os.path.splitext(name[4])
+    rejected_face_names.append(user_name)
+wait_list_name=[]
+wait_list_face=[]
+for img in glob.glob("iSee/static/img_data/wait_list/*.jpg"):
+	image = face_recognition.load_image_file(img)
+	data = face_recognition.face_encodings(image)[0]
+	wait_list_face.append(data)
+	name=img.split('/')
+	user_name, ext = os.path.splitext(name[4])
+	wait_list_name.append(user_name)
 face_locations = []
 face_encodings = []
 face_names = []
@@ -88,16 +101,13 @@ def stream_response_generator():
 				current_time=datetime.now()
 				update.update_time_stamp(current_time,name)
 			else:
-				ret, frame = video_capture.read()
-				face_locations = face_recognition.face_locations(frame)
-				face_encodings = face_recognition.face_encodings(frame, face_locations)
 				face_names = []
 				for face_encoding in face_encodings:
-					match = face_recognition.compare_faces(reject_list_face, face_encoding, tolerance=0.50)
+					match = face_recognition.compare_faces(wait_list_face, face_encoding, tolerance=0.50)
 					name = None
 					if True in match:
 						first_match_index = match.index(True)
-						name = reject_list_name[first_match_index]
+						name = wait_list_name[first_match_index]
 						# print ('test:::::::::::::')
 					else:
 
@@ -118,13 +128,13 @@ def stream_response_generator():
 								else:
 									current_time=datetime.now()
 									id=insert.create_new_user(current_time)
-									filename='iSee/static/img_data/reject_list/'+id+'.jpg'
+									filename='iSee/static/img_data/wait_list/'+id+'.jpg'
 									out = cv2.imwrite(filename, fram)				
 									# out = cv2.imwrite(filename, frame)
 									image = face_recognition.load_image_file(filename)
 									data = face_recognition.face_encodings(image)[0]
-									reject_list_face.append(data)
-									reject_list_name.append(id)	
+									wait_list_face.append(data)
+									wait_list_name.append(id)	
 									Subject="Alert Message from iVigil (Smart Vigilance Systems)"
 									Body="http://192.168.10.11:8000/iSee/accept/"+str(id)
 									Body=Body+"    http://192.168.10.11:8000/iSee/reject/"+str(id)
@@ -160,15 +170,12 @@ def stream_response_generator():
 
 def accept(request,user_id):
 	# print "HALO"
-	res=user_id
+	user_id=user_id[4:]
 	import shutil
+	old_file='iSee/static/img_data/wait_list/'+"wid_"+str(user_id)+'.jpg'
 	id=insert.accept_user(user_id)
-	old_file='iSee/static/img_data/reject_list/'+"rejtd_"+str(id)+'.jpg'
-	new_file='iSee/static/img_data/accept_list/id_'+str(id)+'.jpg'
-	print("ssssss",id)
-	delete.del_reject_list("rejtd_"+str(id))
-	exists = os.path.isfile(old_file)
-	# if exists:
+	new_file='iSee/static/img_data/accept_list/'+str(id)+'.jpg'
+	# print("ssssss",id)
 	shutil.copy2(old_file, new_file)
 	os.remove(old_file)
 	image = face_recognition.load_image_file(new_file)
@@ -182,12 +189,13 @@ def accept(request,user_id):
 	print('*'*60)
 	print("a New User is Accepted with id "+ str(user_name) +" by *admin* ")
 	print('*'*60)
-	return HttpResponse("user "+res+" is Accepted Successfully") 
+	return HttpResponse("user "+user_id+" is Accepted Successfully") 
 	# else:
 		# return HttpResponse("user "+res+" is already accepted or not exits in reject list") 
-def alert(request):
+def waiting_list(request):
 	waiting_list=[]
 	data=select.select_waiting_list()
+	data=reversed(data)
 	for i in data:
 		a={'id':i[1]}
 		waiting_list.append(a)
@@ -196,14 +204,22 @@ def alert(request):
 
 def reject(request,user_id):
 	# print "HALO"
-	res=user_id
-	for i in range(0,len(reject_list_name)):
-		if reject_list_name[i] == user_id:
-			reject_list_name[i]="Rejected"
-
-	file="iSee/static/img_data/reject_list/"+str(user_id)+'.jpg'
-	os.remove(file)
-	return HttpResponse(res+"Rejected")
+	user_id=user_id[4:]
+	import shutil
+	old_file='iSee/static/img_data/wait_list/'+"wid_"+str(user_id)+'.jpg'
+	id=insert.reject_user(user_id)
+	new_file='iSee/static/img_data/reject_list/'+str(id)+'.jpg'
+	shutil.copy2(old_file, new_file)
+	os.remove(old_file)
+	image = face_recognition.load_image_file(new_file)
+	data = face_recognition.face_encodings(image)[0]
+	rejected_faces.append(data)
+	name=new_file.split('/')
+	# print(name)
+	user_name, ext = os.path.splitext(name[4])
+	# print (user_name,ext)
+	rejected_face_names.append(user_name)
+	return HttpResponse(user_id+"Rejected")
 
 
 
@@ -283,7 +299,7 @@ def popup_face_rec(request):
 	            # id=randint(0,10000000)
 	            current_time=datetime.now()
 	            id=insert.create_new_user(current_time)
-	            filename='iSee/static/img_data/reject_list/'+str(id)+'.jpg'
+	            filename='iSee/static/img_data/wait_list/'+str(id)+'.jpg'
 	            gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
 	            faces=face_cascade.detectMultiScale(gray,1.3,5)
 	            for (top, right, bottom, left) in faces:

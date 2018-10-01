@@ -8,7 +8,7 @@ urlpatterns = [
 	url(r'^reject/(\w+)/', views.reject, name="reject"),
 	url(r'^popup_face_rec',views.popup_face_rec,name="popup_face_rec"),
 	url(r'^demo',views.demo,name="demo"),
-	url(r'^alert',views.alert,name="alert"),
+	url(r'^waiting_list',views.waiting_list,name="waiting_list"),
 
 	url(r'^stream_video$',views.stream_video,name="stream_video"),
 
