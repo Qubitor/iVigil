@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 29, 2018 at 05:35 PM
+-- Generation Time: Oct 01, 2018 at 05:25 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -37,7 +37,8 @@ CREATE TABLE `accept_list` (
 --
 
 INSERT INTO `accept_list` (`id`, `user_id`, `time_stamp`) VALUES
-(1, 'Q_236', '2018-09-27 06:38:33');
+(1, 'Q_236', '2018-09-27 06:38:33'),
+(93, 'id_2', '2018-10-01 05:37:04');
 
 -- --------------------------------------------------------
 
@@ -253,7 +254,26 @@ CREATE TABLE `reject_list` (
 --
 
 INSERT INTO `reject_list` (`id`, `user_id`, `time_stamp`) VALUES
-(1, 'Q_1', '2018-09-27 11:38:04');
+(387, '1', '2018-10-01 11:00:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wait_list`
+--
+
+CREATE TABLE `wait_list` (
+  `id` bigint(20) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `wait_list`
+--
+
+INSERT INTO `wait_list` (`id`, `user_id`, `time_stamp`) VALUES
+(1, 'waitid_1', '2018-10-01 08:45:13');
 
 --
 -- Indexes for dumped tables
@@ -345,6 +365,12 @@ ALTER TABLE `reject_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `wait_list`
+--
+ALTER TABLE `wait_list`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -352,7 +378,7 @@ ALTER TABLE `reject_list`
 -- AUTO_INCREMENT for table `accept_list`
 --
 ALTER TABLE `accept_list`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT for table `auth_group`
 --
@@ -402,7 +428,12 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT for table `reject_list`
 --
 ALTER TABLE `reject_list`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=292;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=390;
+--
+-- AUTO_INCREMENT for table `wait_list`
+--
+ALTER TABLE `wait_list`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- Constraints for dumped tables
 --
