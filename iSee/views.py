@@ -110,47 +110,55 @@ def stream_response_generator():
 						name = wait_list_name[first_match_index]
 						# print ('test:::::::::::::')
 					else:
+						for face_encoding in face_encodings:
+							match = face_recognition.compare_faces(rejected_faces, face_encoding, tolerance=0.50)
+							name = None
+							if True in match:
+								first_match_index = match.index(True)
+								name = rejected_face_names[first_match_index]
+								# print ('test:::::::::::::')
+							else:
 
-						gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-						faces=face_cascade.detectMultiScale(gray,1.3,5)
-						for (top, right, bottom, left) in faces:
-							fram=frame[right-50:right+left+50,top-50:top+bottom+100]
-							filename="temp.jpg"
-							out = cv2.imwrite(filename, fram)
-							face_locations = face_recognition.face_locations(fram)
-							face_encodings = face_recognition.face_encodings(fram, face_locations)
-							for face_encoding in face_encodings:
-								match = face_recognition.compare_faces(known_faces, face_encoding, tolerance=0.50)
-								name = None
-								if True in match:
-									first_match_index = match.index(True)
-									name = known_face_names[first_match_index]
-								else:
-									current_time=datetime.now()
-									id=insert.create_new_user(current_time)
-									filename='iSee/static/img_data/wait_list/'+id+'.jpg'
-									out = cv2.imwrite(filename, fram)				
-									# out = cv2.imwrite(filename, frame)
-									image = face_recognition.load_image_file(filename)
-									data = face_recognition.face_encodings(image)[0]
-									wait_list_face.append(data)
-									wait_list_name.append(id)	
-									Subject="Alert Message from iVigil (Smart Vigilance Systems)"
-									Body="http://192.168.10.11:8000/iSee/accept/"+str(id)
-									Body=Body+"    http://192.168.10.11:8000/iSee/reject/"+str(id)
-									email = EmailMessage(Subject, Body, to=['sureshiknow@gmail.com'])
-									email.send()
-									print ("new face recognized Time:",current_time)
-				        #it will insert and update the time stamp of an particular user's into database
+								gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+								faces=face_cascade.detectMultiScale(gray,1.3,5)
+								for (top, right, bottom, left) in faces:
+									fram=frame[right-50:right+left+50,top-50:top+bottom+100]
+									filename="temp.jpg"
+									out = cv2.imwrite(filename, fram)
+									face_locations = face_recognition.face_locations(fram)
+									face_encodings = face_recognition.face_encodings(fram, face_locations)
+									for face_encoding in face_encodings:
+										match = face_recognition.compare_faces(known_faces, face_encoding, tolerance=0.50)
+										name = None
+										if True in match:
+											first_match_index = match.index(True)
+											name = known_face_names[first_match_index]
+										else:
+											current_time=datetime.now()
+											id=insert.create_new_user(current_time)
+											filename='iSee/static/img_data/wait_list/'+id+'.jpg'
+											out = cv2.imwrite(filename, fram)				
+											# out = cv2.imwrite(filename, frame)
+											image = face_recognition.load_image_file(filename)
+											data = face_recognition.face_encodings(image)[0]
+											wait_list_face.append(data)
+											wait_list_name.append(id)	
+											Subject="Alert Message from iVigil (Smart Vigilance Systems)"
+											Body="http://192.168.10.11:8000/iSee/accept/"+str(id)
+											Body=Body+"    http://192.168.10.11:8000/iSee/reject/"+str(id)
+											email = EmailMessage(Subject, Body, to=['sureshiknow@gmail.com'])
+											email.send()
+											print ("new face recognized Time:",current_time)
+						        #it will insert and update the time stamp of an particular user's into database
 
-						            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem  WARNING !!!!" "safe_quit"'%())
-									# os.system(' telegram-cli -k server.pub -W -e "msg Alert WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
-									# os.system(' telegram-cli -k server.pub -W -e "send_photo Alert %s" "safe_quit"' %(filename) )
-						   #          # os.system(' telegram-cli -k server.pub -W -e "msg Alert NEW USER_ID: %s " "safe_quit" '%(id))
-									# os.system(' telegram-cli -k server.pub -W -e "msg Alert Accept : http://192.168.10.11:8000/iSee/accept/%s "  "safe_quit" '%(id))
-									# os.system(' telegram-cli -k server.pub -W -e "msg Alert Reject : http://192.168.10.11:8000/iSee/reject/%s " "safe_quit" '%(id))
-									# # print (id)
-									data=select.select_user(id)
+								            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem  WARNING !!!!" "safe_quit"'%())
+											# os.system(' telegram-cli -k server.pub -W -e "msg Alert WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
+											# os.system(' telegram-cli -k server.pub -W -e "send_photo Alert %s" "safe_quit"' %(filename) )
+								   #          # os.system(' telegram-cli -k server.pub -W -e "msg Alert NEW USER_ID: %s " "safe_quit" '%(id))
+											# os.system(' telegram-cli -k server.pub -W -e "msg Alert Accept : http://192.168.10.11:8000/iSee/accept/%s "  "safe_quit" '%(id))
+											# os.system(' telegram-cli -k server.pub -W -e "msg Alert Reject : http://192.168.10.11:8000/iSee/reject/%s " "safe_quit" '%(id))
+											# # print (id)
+											data=select.select_user(id)
 			face_names.append(name)
 			for (top, right, bottom, left), name in zip(face_locations, face_names):
 				if not name:
@@ -207,18 +215,22 @@ def reject(request,user_id):
 	user_id=user_id[4:]
 	import shutil
 	old_file='iSee/static/img_data/wait_list/'+"wid_"+str(user_id)+'.jpg'
+	print(user_id)
 	id=insert.reject_user(user_id)
 	new_file='iSee/static/img_data/reject_list/'+str(id)+'.jpg'
 	shutil.copy2(old_file, new_file)
-	os.remove(old_file)
 	image = face_recognition.load_image_file(new_file)
 	data = face_recognition.face_encodings(image)[0]
 	rejected_faces.append(data)
 	name=new_file.split('/')
 	# print(name)
 	user_name, ext = os.path.splitext(name[4])
-	# print (user_name,ext)
 	rejected_face_names.append(user_name)
+	os.remove(old_file)
+	s='wid_'+user_id
+	for i in range(0,len(wait_list_name)):
+		if(wait_list_name[i]==s):
+			wait_list_name[i]=user_name
 	return HttpResponse(user_id+"Rejected")
 
 

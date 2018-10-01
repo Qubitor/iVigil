@@ -20,7 +20,8 @@ class insert:
 		con.commit()
 		return id
 	def reject_user(*data):
-		obj.execute("DELETE  FROM wait_list WHERE user_id='%s' ;" %(data[1]))
+		print(data[1])
+		obj.execute("DELETE  FROM wait_list WHERE user_id='%s' ;" %('wid_'+data[1]))
 		con.commit()
 		obj.execute("SELECT id from reject_list order by id desc limit 1")
 		id="rjtd_"+str(obj.fetchone()[0]+1)
