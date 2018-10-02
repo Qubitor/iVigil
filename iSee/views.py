@@ -3,11 +3,10 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponse
 from django.core.mail import EmailMessage
-# from django.core.mail import EmailMultiAlternatives
-# from django.template.loader import get_template
-# from django.template import Context
 from django.http import StreamingHttpResponse
 
+from django.template import Context
+from django.template.loader import render_to_string, get_template
 from DB_funtions import select, insert, update,delete
 select=select()
 insert=insert()
@@ -99,6 +98,14 @@ def stream_response_generator():
 				print ("RECOGNIZED TIME :",time[11:],time[0:11])
 				print ("*"*60,'\n\n')
 				current_time=datetime.now()
+				# subject = "I am an HTML email"
+				# to = ['sureshiknow@gmail.com']
+				# from_email = 'qubitor.python@gmail.com'
+				# user_info =data[1]
+				# message = get_template('mail.html').render(user_info)
+				# msg = EmailMessage(subject, message, to=to, from_email=from_email)
+				# msg.content_subtype = 'html'
+				# msg.send()
 				update.update_time_stamp(current_time,name)
 			else:
 				face_names = []
@@ -108,7 +115,6 @@ def stream_response_generator():
 					if True in match:
 						first_match_index = match.index(True)
 						name = wait_list_name[first_match_index]
-						# print ('test:::::::::::::')
 					else:
 						for face_encoding in face_encodings:
 							match = face_recognition.compare_faces(rejected_faces, face_encoding, tolerance=0.50)
@@ -116,9 +122,7 @@ def stream_response_generator():
 							if True in match:
 								first_match_index = match.index(True)
 								name = rejected_face_names[first_match_index]
-								# print ('test:::::::::::::')
 							else:
-
 								gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
 								faces=face_cascade.detectMultiScale(gray,1.3,5)
 								for (top, right, bottom, left) in faces:
@@ -143,20 +147,12 @@ def stream_response_generator():
 											data = face_recognition.face_encodings(image)[0]
 											wait_list_face.append(data)
 											wait_list_name.append(id)	
-											Subject="Alert Message from iVigil (Smart Vigilance Systems)"
-											Body="http://192.168.10.11:8000/iSee/accept/"+str(id)
-											Body=Body+"    http://192.168.10.11:8000/iSee/reject/"+str(id)
-											email = EmailMessage(Subject, Body, to=['sureshiknow@gmail.com'])
-											email.send()
 											print ("new face recognized Time:",current_time)
-						        #it will insert and update the time stamp of an particular user's into database
-
-								            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem  WARNING !!!!" "safe_quit"'%())
-											# os.system(' telegram-cli -k server.pub -W -e "msg Alert WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
-											# os.system(' telegram-cli -k server.pub -W -e "send_photo Alert %s" "safe_quit"' %(filename) )
-								   #          # os.system(' telegram-cli -k server.pub -W -e "msg Alert NEW USER_ID: %s " "safe_quit" '%(id))
-											# os.system(' telegram-cli -k server.pub -W -e "msg Alert Accept : http://192.168.10.11:8000/iSee/accept/%s "  "safe_quit" '%(id))
-											# os.system(' telegram-cli -k server.pub -W -e "msg Alert Reject : http://192.168.10.11:8000/iSee/reject/%s " "safe_quit" '%(id))
+											os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem  WARNING !!!!" "safe_quit"'%())
+											os.system(' telegram-cli -k server.pub -W -e "msg Alert WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
+											os.system(' telegram-cli -k server.pub -W -e "send_photo Alert %s" "safe_quit"' %(filename) )
+											os.system(' telegram-cli -k server.pub -W -e "msg Alert Accept : http://192.168.10.5:8000/iSee/accept/%s "  "safe_quit" '%(id))
+											os.system(' telegram-cli -k server.pub -W -e "msg Alert Reject : http://192.168.10.5:8000/iSee/reject/%s " "safe_quit" '%(id))
 											# # print (id)
 											data=select.select_user(id)
 			face_names.append(name)
@@ -235,7 +231,22 @@ def reject(request,user_id):
 
 
 
+def send_mail(request):
+    subject = "I am an HTML email"
+    to = ['sureshiknow@gmail.com']
+    from_email = 'qubitor.python@gmail.com'
 
+    ctx = {
+        'user': 'buddy',
+        'purchase': 'Books'
+    }
+
+    message = get_template('mail.html').render(Context(ctx))
+    msg = EmailMessage(subject, message, to=to, from_email=from_email)
+    msg.content_subtype = 'html'
+    msg.send()
+
+    return 0
 
 
 
