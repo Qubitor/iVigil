@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+from ip_config import local_ip
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,7 +25,7 @@ SECRET_KEY = 'gi0yejx4m0h^ndc0)yba-1v0zjt-w=^7=6nqlsw&u5-k_gpkjk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.10.5','127.0.0.1','localhost']
+ALLOWED_HOSTS = [local_ip,'127.0.0.1','localhost']
 
 
 # Application definition

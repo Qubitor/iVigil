@@ -8,6 +8,7 @@ from django.http import StreamingHttpResponse
 from django.template import Context
 from django.template.loader import render_to_string, get_template
 from DB_funtions import select, insert, update,delete
+from ip_config import local_ip
 select=select()
 insert=insert()
 update=update()
@@ -144,8 +145,8 @@ def stream_response_generator():
                             os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
                             os.system(' telegram-cli -k server.pub -W -e "send_photo Alertsystem %s" "safe_quit"' %(filename) )
                             os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem NEW USER_ID: %s " "safe_quit" '%(id))
-                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Accept : http://192.168.10.5:8000/iSee/accept/%s " "safe_quit" '%(id))
-                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Reject : http://192.168.10.5:8000/iSee/reject/%s " "safe_quit" '%(id))
+                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Accept : http://%s:8000/iSee/accept/%s " "safe_quit" '%(local_ip,id))
+                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Reject : http://%s:8000/iSee/reject/%s " "safe_quit" '%(local_ip,id))
             face_names.append(name)
             for (top, right, bottom, left), name in zip(face_locations, face_names):
                 if not name:
@@ -198,7 +199,7 @@ def waiting_list(request):
 	for i in data:
 		a={'id':i[1]}
 		waiting_list.append(a)
-	return render(request,'alert.html',{'data':waiting_list})   
+	return render(request,'alert.html',{'data':waiting_list,'ip':local_ip})   
 	  
 
 def reject(request,user_id):
