@@ -1,5 +1,5 @@
 import MySQLdb
-con=MySQLdb.connect("localhost","root","test","face_rec_data")
+con=MySQLdb.connect("localhost","root","test","face_rec_data",client_flag=131072|65536)
 obj=con.cursor()
 class insert:
 	def create_new_user(*data):
@@ -11,16 +11,16 @@ class insert:
   		return ID
 
 	def accept_user(*data):
-		print(data[1])
+		# print(data[1])
 		obj.execute("DELETE  FROM wait_list WHERE id='%s' ;" %(data[1]))
 		con.commit()
 		obj.execute("SELECT id from accept_list order by id desc limit 1")
-		id="id_"+str(obj.fetchone()[0]+1)
+		id="aid_"+str(obj.fetchone()[0]+1)
 		obj.execute(" INSERT INTO accept_list (`user_id`) VALUES('%s')" %(id))
 		con.commit()
 		return id
 	def reject_user(*data):
-		print(data[1])
+		# print(data[1])
 		obj.execute("DELETE  FROM wait_list WHERE user_id='%s' ;" %('wid_'+data[1]))
 		con.commit()
 		obj.execute("SELECT id from reject_list order by id desc limit 1")
@@ -31,16 +31,14 @@ class insert:
 
 class update:
 	def update_time_stamp(*data):
-		obj.execute("UPDATE accept_list SET time_stamp='%s' WHERE user_id='%s';" %(data[1],data[2]))
-		con.commit()
-
+			obj.execute("UPDATE accept_list SET time_stamp='%s' WHERE user_id='%s';" %(data[1],data[2]))
+			con.commit()
 
 class select:
 	def select_user(*data):
-
 		obj.execute("SELECT * FROM accept_list WHERE user_id='%s' ;" %(data[1]))
 		data=obj.fetchone();
-		return data
+		return data					
 
 	def select_waiting_list(*data):
 

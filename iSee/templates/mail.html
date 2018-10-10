@@ -1,18 +1,11 @@
 ﻿
 
-{{user_info}}
+{{data}}
 
-<button>test</button>
 
-<img height='30%' widht='30%'src="http://192.168.10.5:8000/static/img_data/wait_list/{{user_info.id}}.jpg">
-<button class="button button1"><a style="text-decoration:none" href="http://192.168.10.5:8000/iSee/accept/{{user_info.id}}">Accept</a></button>
-<button class="button button3"><a style="text-decoration:none"  href="http://192.168.10.5:8000/iSee/reject/{{user_info.id}}">Reject</a></button>
-
-											# Subject="Alert Message from iVigil (Smart Vigilance Systems)"
-											# Body="http://192.168.10.5:8000/iSee/accept/"+str(id)
-											# Body=Body+"    http://192.168.10.5:8000/iSee/reject/"+str(id)
-											# email = EmailMessage(Subject, Body, to=['sureshiknow@gmail.com'])
-											# email.send()
+<img height='30%' widht='30%'src="http://192.168.10.5:8000/static/img_data/wait_list/obama.jpg">
+<button class="button button1"><a style="text-decoration:none" href="http://192.168.10.5:8000/iSee/accept/{{data}}">Accept</a></button>
+<button class="button button3" style=''><a style="text-decoration:none"  href="http://192.168.10.5:8000/iSee/reject/{{data}}">Reject</a></button>
 
 <style>
 
