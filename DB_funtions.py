@@ -11,7 +11,6 @@ class insert:
   		return ID
 
 	def accept_user(*data):
-		# print(data[1])
 		obj.execute("DELETE  FROM wait_list WHERE id='%s' ;" %(data[1]))
 		con.commit()
 		obj.execute("SELECT id from accept_list order by id desc limit 1")
@@ -19,8 +18,8 @@ class insert:
 		obj.execute(" INSERT INTO accept_list (`user_id`) VALUES('%s')" %(id))
 		con.commit()
 		return id
+		
 	def reject_user(*data):
-		# print(data[1])
 		obj.execute("DELETE  FROM wait_list WHERE user_id='%s' ;" %('wid_'+data[1]))
 		con.commit()
 		obj.execute("SELECT id from reject_list order by id desc limit 1")
@@ -48,7 +47,6 @@ class select:
 
 class delete:
 	def del_reject_list(*data):
-		# print(data[0])
 		obj.execute("DELETE  FROM reject_list WHERE user_id='%s' ;" %(data[0]))
 		con.commit()
 

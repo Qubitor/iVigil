@@ -112,8 +112,7 @@ def stream_response_generator():
                         current_time=datetime.now()
                         update.update_time_stamp(current_time,name)
                     except:
-                        print("EXCEPTIONS:",name)
-                    # print(name)
+                        pass
             else:
                 # name="unknow"
                 gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
@@ -183,9 +182,7 @@ def accept(request,user_id):
     user_name, ext = os.path.splitext(name[4])
     for i in range(0,len(face_name_list)):
         if(face_name_list[i]==s):
-            print("Condition check in ACEEPT")
             face_name_list[i]=user_name
-    print(face_name_list)
     print('*'*60)
     print("a New User is Accepted with id "+ str(user_name) +" by *admin* ")
     print('*'*60)
@@ -203,21 +200,14 @@ def waiting_list(request):
 	  
 
 def reject(request,user_id):
-	# print "HALO"
 	user_id=user_id[4:]
 	import shutil
 	old_file='iSee/static/img_data/wait_list/'+"wid_"+str(user_id)+'.jpg'
-	# print(user_id)
 	id=insert.reject_user(user_id)
 	new_file='iSee/static/img_data/reject_list/'+str(id)+'.jpg'
 	shutil.copy2(old_file, new_file)
-	# image = face_recognition.load_image_file(new_file)
-	# data = face_recognition.face_encodings(image)[0]
-	# rejected_faces.append(data)
 	name=new_file.split('/')
-	# print(name)
 	user_name, ext = os.path.splitext(name[4])
-	# rejected_face_names.append(user_name)
 	os.remove(old_file)
 	s='wid_'+user_id
 	for i in range(0,len(face_name_list)):
