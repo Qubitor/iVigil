@@ -1,1 +1,7 @@
-local_ip='192.168.10.5'
+
+import sys
+
+arguments = sys.argv[2]
+arg=arguments.split(':')
+local_ip=arg[0]
+port=arg[1]

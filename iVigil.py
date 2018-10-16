@@ -21,6 +21,7 @@ for img in glob.glob("iSee/static/img_data/accept_list/*.jpg"):
     name=img.split('/')
     user_name, ext = os.path.splitext(name[4])
     face_name_list.append(user_name)
+print(face_data,face_name_list)
 for img in glob.glob("iSee/static/img_data/reject_list/*.jpg"):
     # Load a sample picture and learn how to recognize it.
     image = face_recognition.load_image_file(img)

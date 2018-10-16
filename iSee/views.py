@@ -8,7 +8,7 @@ from django.http import StreamingHttpResponse
 from django.template import Context
 from django.template.loader import render_to_string, get_template
 from DB_funtions import select, insert, update,delete
-from ip_config import local_ip
+from ip_config import local_ip,port
 select=select()
 insert=insert()
 update=update()
@@ -17,36 +17,26 @@ import face_recognition
 import os
 import glob
 import cv2
+import csv
 import sys
 import numpy
 face_cascade=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 face_data = []
 face_name_list = []
-for img in glob.glob("iSee/static/img_data/accept_list/*.jpg"):
-    # Load a sample picture and learn how to recognize it.
-    image = face_recognition.load_image_file(img)
-    data = face_recognition.face_encodings(image)[0]
+with open('user_images.csv', 'r') as readFile:
+    reader = csv.reader(readFile)
+    lines = list(reader)
+for i in range(1,len(lines)):
+    data=lines[i]
+    face_name_list.append(data[0])
+    en=data[1:]
+    data=[]
+    for k in en:
+        data.append(float(k))
     face_data.append(data)
-    name=img.split('/')
-    user_name, ext = os.path.splitext(name[4])
-    face_name_list.append(user_name)
-for img in glob.glob("iSee/static/img_data/reject_list/*.jpg"):
-    # Load a sample picture and learn how to recognize it.
-    image = face_recognition.load_image_file(img)
-    data = face_recognition.face_encodings(image)[0]
-    face_data.append(data)
-    name=img.split('/')
-    user_name, ext = os.path.splitext(name[4])
-    face_name_list.append(user_name)
-for img in glob.glob("iSee/static/img_data/wait_list/*.jpg"):
-    # Load a sample picture and learn how to recognize it.
-    image = face_recognition.load_image_file(img)
-    data = face_recognition.face_encodings(image)[0]
-    face_data.append(data)
-    name=img.split('/')
-    user_name, ext = os.path.splitext(name[4])
-    face_name_list.append(user_name)
+
+
 face_locations = []
 face_encodings = []
 face_names = []
@@ -112,7 +102,8 @@ def stream_response_generator():
                         current_time=datetime.now()
                         update.update_time_stamp(current_time,name)
                     except:
-                        pass
+                        print("EXCEPTIONS:",name)
+                    # print(name)
             else:
                 # name="unknow"
                 gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
@@ -139,13 +130,20 @@ def stream_response_generator():
                             data = face_recognition.face_encodings(image)[0]
                             face_data.append(data)
                             face_name_list.append(id)   
+                            row = [id]
+                            for i in data:
+                                row.append(float(i))
+                            with open('user_images.csv', 'a') as csvFile:
+                                writer = csv.writer(csvFile)
+                                writer.writerow(row)
+                            csvFile.close()
                             print ("new face recognized Time:",current_time)
                             data=select.select_user(id)
                             os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
                             os.system(' telegram-cli -k server.pub -W -e "send_photo Alertsystem %s" "safe_quit"' %(filename) )
                             os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem NEW USER_ID: %s " "safe_quit" '%(id))
-                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Accept : http://%s:8000/iSee/accept/%s " "safe_quit" '%(local_ip,id))
-                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Reject : http://%s:8000/iSee/reject/%s " "safe_quit" '%(local_ip,id))
+                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Accept : http://%s:%s/iSee/accept/%s " "safe_quit" '%(local_ip,port,id))
+                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Reject : http://%s:%s/iSee/reject/%s " "safe_quit" '%(local_ip,port,id))
             face_names.append(name)
             for (top, right, bottom, left), name in zip(face_locations, face_names):
                 if not name:
@@ -180,6 +178,19 @@ def accept(request,user_id):
     os.remove(old_file)
     name=new_file.split('/')
     user_name, ext = os.path.splitext(name[4])
+    with open('user_images.csv', 'r') as readFile:
+        reader = csv.reader(readFile)
+        lines = list(reader)
+        for x in lines:
+            if(x[0]==s):
+                x[0] = user_name
+
+    with open('user_images.csv', 'w') as writeFile:
+        writer = csv.writer(writeFile)
+        writer.writerows(lines)
+
+    readFile.close()
+    writeFile.close()
     for i in range(0,len(face_name_list)):
         if(face_name_list[i]==s):
             face_name_list[i]=user_name
@@ -196,24 +207,33 @@ def waiting_list(request):
 	for i in data:
 		a={'id':i[1]}
 		waiting_list.append(a)
-	return render(request,'alert.html',{'data':waiting_list,'ip':local_ip})   
+	return render(request,'alert.html',{'data':waiting_list,'ip':local_ip,'port':port})   
 	  
 
 def reject(request,user_id):
-	user_id=user_id[4:]
-	import shutil
-	old_file='iSee/static/img_data/wait_list/'+"wid_"+str(user_id)+'.jpg'
-	id=insert.reject_user(user_id)
-	new_file='iSee/static/img_data/reject_list/'+str(id)+'.jpg'
-	shutil.copy2(old_file, new_file)
-	name=new_file.split('/')
-	user_name, ext = os.path.splitext(name[4])
-	os.remove(old_file)
-	s='wid_'+user_id
-	for i in range(0,len(face_name_list)):
-		if(face_name_list[i]==s):
-			face_name_list[i]=user_name
-	return HttpResponse(user_id+"Rejected")
+    user_id=user_id[4:]
+    import shutil
+    old_file='iSee/static/img_data/wait_list/'+"wid_"+str(user_id)+'.jpg'
+    id=insert.reject_user(user_id)
+    new_file='iSee/static/img_data/reject_list/'+str(id)+'.jpg'
+    shutil.copy2(old_file, new_file)
+    name=new_file.split('/')
+    user_name, ext = os.path.splitext(name[4])
+    os.remove(old_file)
+    s='wid_'+user_id
+    with open('user_images.csv','r') as readFile:
+        reader=csv.reader(readFile)
+        lines=list(reader)
+        for x in lines:
+            if(x[0]==s):
+                x[0]=user_name
+    with open('user_images.csv','w') as writeFile:
+        writer = csv.writer(writeFile)
+        writer.writerows(lines)
+    for i in range(0,len(face_name_list)):
+        if(face_name_list[i]==s):
+            face_name_list[i]=user_name
+    return HttpResponse(user_id+"Rejected")
 
 
 

@@ -4,9 +4,9 @@
 {% if data %}
 {% for i in data %}
 user ID:<b>{{i.id}}</b><br>
-<img height='30%' widht='30%'src="http://{{ip}}:8000/static/img_data/wait_list/{{i.id}}.jpg">
-<button class="button button1"><a style="text-decoration:none" href="http://{{ip}}:8000/iSee/accept/{{i.id}}">Accept</a></button>
-<button class="button button3"><a style="text-decoration:none"  href="http://{{ip}}:8000/iSee/reject/{{i.id}}">Reject</a></button>
+<img height='30%' widht='30%'src="http://{{ip}}:{{port}}/static/img_data/wait_list/{{i.id}}.jpg">
+<button class="button button1"><a style="text-decoration:none" href="http://{{ip}}:{{port}}/iSee/accept/{{i.id}}">Accept</a></button>
+<button class="button button3"><a style="text-decoration:none"  href="http://{{ip}}:{{port}}/iSee/reject/{{i.id}}">Reject</a></button>
 <hr>
 {% endfor %}
 
