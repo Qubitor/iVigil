@@ -9,7 +9,7 @@ import os
 # from utils import create_csv
 import glob
 import numpy
-face_cascade=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+face_cascade=cv2.CascadeClassifier('iSee/static/opencv/haarcascade_frontalface_default.xml')
 
 face_data = []
 face_name_list = []
@@ -83,7 +83,7 @@ def demo():
                 faces=face_cascade.detectMultiScale(gray,1.3,5)
                 for (top, right, bottom, left) in faces:
                     fram=frame[right-50:right+left+50,top-50:top+bottom+100]
-                    filename="temp.jpg"
+                    filename="iSee/static/temp.jpg"
                     out = cv2.imwrite(filename, fram)
                     face_locations = face_recognition.face_locations(fram)
                     face_encodings = face_recognition.face_encodings(fram, face_locations)
