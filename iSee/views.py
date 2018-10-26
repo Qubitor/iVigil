@@ -188,11 +188,11 @@ def stream_response_generator():
                                             csvFile.close()
                                             print ("new face recognized Time:",current_time)
                                             data=select.select_user(id)
-                                            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
-                                            # os.system(' telegram-cli -k server.pub -W -e "send_photo Alertsystem %s" "safe_quit"' %(filename) )
-                                            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem NEW USER_ID: %s " "safe_quit" '%(id))
-                                            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Accept : http://%s:%s/iSee/accept/%s " "safe_quit" '%(local_ip,port,id))
-                                            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Reject : http://%s:%s/iSee/reject/%s " "safe_quit" '%(local_ip,port,id))
+                                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
+                                            os.system(' telegram-cli -k server.pub -W -e "send_photo Alertsystem %s" "safe_quit"' %(filename) )
+                                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem NEW USER_ID: %s " "safe_quit" '%(id))
+                                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Accept : http://%s:%s/iSee/accept/%s " "safe_quit" '%(local_ip,port,id))
+                                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Reject : http://%s:%s/iSee/reject/%s " "safe_quit" '%(local_ip,port,id))
             face_names.append(name)
             for (top, right, bottom, left), name in zip(face_locations, face_names):
                 if not name:
