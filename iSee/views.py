@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+
 from django.http import HttpResponse
 from django.core.mail import EmailMessage
 from django.http import StreamingHttpResponse
@@ -107,7 +108,7 @@ def stream_video(request):
 	return StreamingHttpResponse(stream_response_generator(),content_type="multipart/x-mixed-replace;boundary=frame")
 
 def stream_response_generator():
-#this makes a web cam object 
+#this makes a web cam object
     i=1
     video_capture=cv2.VideoCapture(0)
     while True:
@@ -173,12 +174,12 @@ def stream_response_generator():
                                             current_time=datetime.now()
                                             id=insert.create_new_user(current_time)
                                             filename='iSee/static/img_data/wait_list/'+id+'.jpg'
-                                            out = cv2.imwrite(filename, fram)               
+                                            out = cv2.imwrite(filename, fram)
                                             # out = cv2.imwrite(filename, frame)
                                             image = face_recognition.load_image_file(filename)
                                             data = face_recognition.face_encodings(image)[0]
                                             waiting_face_data.append(data)
-                                            waiting_name_list.append(id)   
+                                            waiting_name_list.append(id)
                                             row = [id]
                                             for i in data:
                                                 row.append(float(i))
@@ -188,11 +189,11 @@ def stream_response_generator():
                                             csvFile.close()
                                             print ("new face recognized Time:",current_time)
                                             data=select.select_user(id)
-                                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
-                                            os.system(' telegram-cli -k server.pub -W -e "send_photo Alertsystem %s" "safe_quit"' %(filename) )
-                                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem NEW USER_ID: %s " "safe_quit" '%(id))
-                                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Accept : http://%s:%s/iSee/accept/%s " "safe_quit" '%(local_ip,port,id))
-                                            os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Reject : http://%s:%s/iSee/reject/%s " "safe_quit" '%(local_ip,port,id))
+                                            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem WARNING: A NEW PERSON HAS ENTERED !!!!  " "safe_quit" ')
+                                            # os.system(' telegram-cli -k server.pub -W -e "send_photo Alertsystem %s" "safe_quit"' %(filename) )
+                                            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem NEW USER_ID: %s " "safe_quit" '%(id))
+                                            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Accept : http://%s:%s/iSee/accept/%s " "safe_quit" '%(local_ip,port,id))
+                                            # os.system(' telegram-cli -k server.pub -W -e "msg Alertsystem Reject : http://%s:%s/iSee/reject/%s " "safe_quit" '%(local_ip,port,id))
             face_names.append(name)
             for (top, right, bottom, left), name in zip(face_locations, face_names):
                 if not name:
@@ -243,18 +244,22 @@ def accept(request,user_id):
     print('*'*60)
     print("a New User is Accepted with id "+ str(user_name) +" by *admin* ")
     print('*'*60)
-    return HttpResponse("user "+user_id+" is Accepted Successfully") 
+    data=[{'message':user_id+" is Accepted Successfully"}]
+    return HttpResponse(json.dumps(data), content_type="application/json")
 
 def waiting_list(request):
-	waiting_list=[]
-	data=select.select_waiting_list()
-	data=reversed(data)
-	for i in data:
-		a={'id':i[1]}
-		waiting_list.append(a)
-	return render(request,'alert.html',{'data':waiting_list,'ip':local_ip,'port':port})   
-	  
-
+    # get_data(request, 's','ssss');
+    waiting_list=[]
+    data=select.select_waiting_list()
+    if(data):
+        data=reversed(data)
+        for i in data:
+            a={'id':i[1]}
+            waiting_list.append(a)
+        return render(request,'alert.html',{'data':waiting_list,'ip':local_ip,'port':port})
+    else:
+        return 0
+import json
 def reject(request,user_id):
     user_id=user_id[4:]
     import shutil
@@ -279,9 +284,17 @@ def reject(request,user_id):
         writer = csv.writer(csvFile)
         writer.writerow(row)
     csvFile.close()
-    return HttpResponse(user_id+"Rejected")
+    data=[{'message':user_id+" is Rejected Successfully"}]
+    return HttpResponse(json.dumps(data), content_type="application/json")
 
-
+def notifi_data(request):
+    waiting_list=[]
+    data=select.select_waiting_list()
+    data=reversed(data)
+    for i in data:
+        a={'id':i[1],'image':'http://192.168.10.3:8000/static/img_data/wait_list/'+str(i[1])+'.jpg'}
+        waiting_list.append(a)
+    return HttpResponse(json.dumps(waiting_list), content_type="application/json")
 
 def send_mail(request):
     subject = "I am an HTML email"
@@ -299,14 +312,3 @@ def send_mail(request):
     msg.send()
 
     return 0
-
-
-
-
-
-
-
-
-
-
-

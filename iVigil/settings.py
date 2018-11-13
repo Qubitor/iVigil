@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [local_ip,'127.0.0.1','localhost']
 
 INSTALLED_APPS = [
     'iSee',
+    'fcm_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -92,6 +93,17 @@ DATABASES = {
     }
 }
 
+
+FCM_DJANGO_SETTINGS = {
+        "FCM_SERVER_KEY": "AIzaSyC1D2hoGbNg5VCNkl6PBEWDt6fHAyoFlYM",
+         # true if you want to have only one active device per registered user at a time
+         # default: False
+        "ONE_DEVICE_PER_USER": True,
+         # devices to which notifications cannot be sent,
+         # are deleted upon receiving error response from FCM
+         # default: False
+        "DELETE_INACTIVE_DEVICES": False,
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

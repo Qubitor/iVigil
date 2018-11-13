@@ -10,5 +10,8 @@ urlpatterns = [
 	url(r'^waiting_list',views.waiting_list,name="waiting_list"),
 
 	url(r'^stream_video$',views.stream_video,name="stream_video"),
+	# url(r'^get_data',views.get_data,name="get_data"),
+	url(r'^notifi_data',views.notifi_data,name="notifi_data"),
+
 
 ]

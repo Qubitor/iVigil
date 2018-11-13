@@ -3,7 +3,7 @@ con=MySQLdb.connect("localhost","root","test","face_rec_data",client_flag=131072
 obj=con.cursor()
 class insert:
 	def create_new_user(*data):
-  		obj.execute("SELECT id from wait_list order by id desc limit 1")
+  		obj.execute("SELECT id from wait_list where id!='%s' and id!='%s' order by id desc limit 1" %(1,11))
   		ID="wid_"+str(obj.fetchone()[0]+1)
   		obj.execute("INSERT INTO wait_list (`user_id`,`time_stamp`) VALUES('%s','%s')" %(ID,data[1]))
   		con.commit()
@@ -11,7 +11,7 @@ class insert:
   		return ID
 
 	def accept_user(*data):
-		obj.execute("DELETE  FROM wait_list WHERE id='%s' ;" %(data[1]))
+		obj.execute("DELETE  FROM wait_list WHERE user_id='%s' ;" %('wid_'+data[1]))
 		con.commit()
 		obj.execute("SELECT id from accept_list order by id desc limit 1")
 		id="aid_"+str(obj.fetchone()[0]+1)
@@ -20,6 +20,7 @@ class insert:
 		return id
 		
 	def reject_user(*data):
+		print("ssss:",data[1])
 		obj.execute("DELETE  FROM wait_list WHERE user_id='%s' ;" %('wid_'+data[1]))
 		con.commit()
 		obj.execute("SELECT id from reject_list order by id desc limit 1")
@@ -41,7 +42,7 @@ class select:
 
 	def select_waiting_list(*data):
 
-		obj.execute("SELECT * from wait_list WHERE id!='%s' ;" %(1))
+		obj.execute("SELECT * from wait_list WHERE id!='%s' and id!='%s' ;" %(1,11))
 		data=obj.fetchall();
 		return data
 
