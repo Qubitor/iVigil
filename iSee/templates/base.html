@@ -11,6 +11,22 @@
     <link rel="stylesheet" href="../static/dist/css/site.min.css">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="../static/dist/js/site.min.js"></script>
+   <!--  <style type="text/css">
+      
+#btn {
+  background: #1922b7;
+  color: #fff;
+  width: 15%;
+  height: 40px;
+     border-radius: 10px;
+     font-size : 20px; 
+}
+
+#btn:hover {
+  background: #1912b5;
+}
+
+    </style> -->
   </head>
   <body>
     <!--nav-->
@@ -24,21 +40,23 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">iVigil - Smart Vigilance Systems</a>
+           
+            <a href="#" class="navbar-brand"></a><font size="5">iVigil - Smart Vigilance Systems
+          </font>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div id="bs-content-row-navbar-collapse-5" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="getting-started.html">Logout</a></li>
-              <li class="active"><a href="getting-started.html">Home</a></li>
-              <li class="active"><a href="getting-started.html">Analytics</a></li>
-              <li class="active"><a href="getting-started.html">Reports</a></li>
-              <li class="active"><a href="index.html">Documentation</a></li>
+              <li class="active"><a href="getting-started.html"><font size="3">Logout</a></li></font>
+<!--               <li class="active"><a href="getting-started.html">Home</a></li>
+ -->              <li class="active"><a href="getting-started.html"><font size="3">Analytics</a></li></font>
+              <li class="active"><a href="getting-started.html"><font size="3">Reports</a></li></font>
+              <li class="active"><a href="index.html"><font size="3">Documentation</a></li></font>
               <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Settings<b class="caret"></b></a>
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><font size="3">Settings<b class="caret"></b></a></font>
                 <ul role="menu" class="dropdown-menu">
-                  <li class="dropdown-header">Setting</li>
+                  <li class="dropdown-header"><font size="3">Setting</li></font>
                   <li><a href="#">Help</a></li>
                   <li class="divider"></li>
                   <li class="active"><a href="#">Profile</a></li>
@@ -51,16 +69,53 @@
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
+<style >
+.navbar-custom {
+    background-color:#1922b7;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+
+.navbar-custom .navbar-nav > .active > a {
+    color: #ffffff;
+    background-color:transparent;
+}
+
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus,
+.navbar-custom .navbar-nav > .open >a {
+    text-decoration: none;
+    background-color: #33aa33;
+}
+
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+.navbar-custom .navbar-toggle {
+    background-color:#eeeeee;
+}
+.navbar-custom .icon-bar {
+    background-color:#33aa33;
+}</style>
+
+
+
     <!--header-->
     <div class="container-fluid">
     <!--documents-->
         <div class="row row-offcanvas row-offcanvas-left">
           <div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
             <ul class="list-group panel">
-                <li class="list-group-item"><i class="glyphicon glyphicon-align-justify"></i> <b>SIDE PANEL</b></li>
-                <li class="list-group-item"><input type="text" class="form-control search-query" placeholder="Search Something"></li>
+                <li class="list-group-item"><i class="glyphicon glyphicon-align-justify"></i> <b>iVigil</b></li>
+              
                 <li class="list-group-item"><a href="index.html"><i class="glyphicon glyphicon-home"></i>Dashboard </a></li>
-                <li class="list-group-item"><a href="/iSee/stream_video"><i class="glyphicon glyphicon-user"></i>Face Recognition</a></li>
+                <li class="list-group-item"><a href="/iSee/stream_video"><i class="glyphicon glyphicon-camera"></i>Face Recognition</a></li>
      <li class="list-group-item"><a href="/iSee/popup_face_rec"><i class="glyphicon glyphicon-user"></i>POP up Face Recognition</a></li>
 
                 <li>
@@ -83,28 +138,14 @@
                 </li>
                 <li class="list-group-item"><a href="list.html"><i class="glyphicon glyphicon-th-list"></i>Employees </a></li>
 
-                <li class="list-group-item"><a href="forms.html"><i class="glyphicon glyphicon-list-alt"></i>Tools</a></li>
-                <li class="list-group-item"><a href="alerts.html"><i class="glyphicon glyphicon-bell"></i>Raw materials</li>
-                <li class="list-group-item"><a href="timeline.html" ><i class="glyphicon glyphicon-indent-left"></i>Machines</a></li>
-                <li class="list-group-item"><a href="calendars.html" ><i class="glyphicon glyphicon-calendar"></i>Products</a></li>
-                <li class="list-group-item"><a href="typography.html" ><i class="glyphicon glyphicon-font"></i>Customers</a></li>
-                <li class="list-group-item"><a href="footers.html" ><i class="glyphicon glyphicon-minus"></i>Competitors</a></li>
-                <li class="list-group-item"><a href="login.html" ><i class="glyphicon glyphicon-lock"></i>Login</a></li>
-                <li>
-                  <a href="#demo4" class="list-group-item " data-toggle="collapse">Item 4  <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <li class="collapse" id="demo4">
-                      <a href="" class="list-group-item">Subitem 1</a>
-                      <a href="" class="list-group-item">Subitem 2</a>
-                      <a href="" class="list-group-item">Subitem 3</a>
-                    </li>
-                </li>
+              
+                
+               
               </ul>
           </div>
           <div class="col-xs-12 col-sm-9 content">
             <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title"><a href="javascript:void(0);" class="toggle-sidebar"><span class="fa fa-angle-double-left" data-toggle="offcanvas" title="Maximize Panel"></span></a> MAIN DASHBOARD</h3>
-              </div>
+              
               <div class="panel-body">
                   <div class="content-row">
                     <div class="row">
@@ -115,50 +156,31 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="../static/css/materialize.min.css"  media="screen,projection"/>
 
-    <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
 
-                    <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <center><h3 class="panel-title">zVinci</h3></center>
-                        </div>
-                        <div class="panel-body">
-                         <center><img src= '{% static "../static/zVinci.png" %}'  alt="iSee" width="160" height="200"/>
-              <br/><br/><input value="iSee"  class="btn btn-primary " name="Submit" type="Submit"><br/><br/></center>
-                        </div>
-                      </div>
-
-                      </div>
-                <div class="col-md-4">
+                    
+                <div class="col-md , bs-content-row-navbar-collapse-5">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                          <center> <h3 class="panel-title">zIIoT</h3></center>
                         </div>
                         <div class="panel-body">
-                          <center><img src= '{% static "../static/zIIoT.png" %}'  alt="Analytics" width="160" height="200"/>
+                          <center><img src= '{% static "../static/zIIoT.png" %}'  alt="iSee" width="160" height="200"/>
               <span class="text-muted"><br/><br/>
-                <input value="Analytics" class="btn btn-primary " name="Submit" type="Submit"><br/><br/></span></center>
+               
+
+                      </button>
+                    <a href="/iSee/stream_video " class="btn btn-info btn-lg" style=" background: #1922b7;">
+                              <span class="glyphicon glyphicon-eye-open"></span> iSee
+                            </a>
+                <br/><br/></span></center>
                         </div>
                       </div>
 
                       </div>
-           <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <center><h3 class="panel-title">zNergy</h3></center>
-                        </div>
-                        <div class="panel-body">
-                         <center>
-                           <img src= '{% static "../static/zNergy.png" %}'  alt="Reports" width="160" height="200"/>
-              <span class="text-muted"><br/><br/><input   class="btn btn-primary " value="Reports" name="Submit" type="Submit"><br/><br/></span>
-                         </center>
-                        </div>
-                      </div>
-
-                      </div>
+         
 
                     </div>
 
@@ -174,29 +196,6 @@
 
 </div></div></div>
 
-    <!--footer-->
-    <div class="site-footer">
-      <div class="container">
-        <div class="download">
-          <span class="download__infos">You simply have to <b>try it</b>.</span>&nbsp;&nbsp;&nbsp;&nbsp;
-          <a class="btn btn-primary" href="https://github.com/silverbux/bootflat-admin/archive/master.zip">Download Bootflat-Admin</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <!-- SmartAddon BEGIN -->
-            <script type="text/javascript">
-            (function() {
-            var s=document.createElement('script');s.type='text/javascript';s.async = true;
-            s.src='http://s1'+'.smartaddon.com/share_addon.js';
-            var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j);
-            })();
-            </script>
-
-            <a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('','bookmarks')"><img alt="Share" src="http://bootflat.github.io/img/share.gif" border="0" /></a>
-            <!-- SmartAddon END -->
-        </div>
-
-        <hr class="dashed" />
-
-      </div>
-    </div>
   </body>
   <script type="text/javascript">
     //--------------------

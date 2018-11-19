@@ -32,7 +32,6 @@ ALLOWED_HOSTS = [local_ip,'127.0.0.1','localhost']
 
 INSTALLED_APPS = [
     'iSee',
-    'fcm_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'face_rec_data',
         'USER': 'root',
-        'PASSWORD': 'test',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '',
         'ATOMIC_REQUESTS': True,

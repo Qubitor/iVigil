@@ -1,5 +1,5 @@
 import MySQLdb
-con=MySQLdb.connect("localhost","root","test","face_rec_data",client_flag=131072|65536)
+con=MySQLdb.connect("localhost","root","root","face_rec_data",client_flag=131072|65536)
 obj=con.cursor()
 class insert:
 	def create_new_user(*data):
