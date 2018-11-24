@@ -68,9 +68,9 @@ for i in range(1,len(lines)):
     rejected_name_list.append(data[0])
     en=data[1:]
     data=[]
-    for k in en:
-        data.append(float(k))
-    rejected_face_data.append(data)
+    # for k in en:
+    #     data.append(float(k))
+    # rejected_face_data.append(data)
 
 face_locations = []
 face_encodings = []
@@ -292,7 +292,7 @@ def notifi_data(request):
     data=select.select_waiting_list()
     data=reversed(data)
     for i in data:
-        a={'id':i[1],'image':'http://192.168.10.3:8000/static/img_data/wait_list/'+str(i[1])+'.jpg'}
+        a={'id':i[1],'image':'http://192.168.10.26:8000/static/img_data/wait_list/'+str(i[1])+'.jpg'}
         waiting_list.append(a)
     return HttpResponse(json.dumps(waiting_list), content_type="application/json")
 

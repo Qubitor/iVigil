@@ -1,0 +1,1 @@
+web: gunicorn vigill-heroku-blog.wsgi --log-file -
