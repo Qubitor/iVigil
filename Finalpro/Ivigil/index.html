@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>Zoogle Theme</title>
+	<meta name="description" content="SimpliQ - Flat & Responsive Bootstrap Admin Template.">
+	<meta name="author" content="Łukasz Holeczek">
+	<meta name="keyword" content="SimpliQ, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<!-- end: Meta -->
+
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end: Mobile Specific -->
+
+	<!-- start: CSS -->
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/css/style.min.css" rel="stylesheet">
+	<link href="assets/css/retina.min.css" rel="stylesheet">
+	<!-- end: CSS -->
+
+
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<script src="assets/css/ie6-8.css"></script>
+		
+	<![endif]-->
+
+	<!-- start: Favicon and Touch Icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:8888/bootstrap/simpliq2/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="http://localhost:8888/bootstrap/simpliq2/ico/favicon.png">
+	<!-- end: Favicon and Touch Icons -->
+
+</head>
+
+<body>
+	<!-- start: Header -->
+	<header class="navbar">
+		<div class="container">
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".sidebar-nav.nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a id="main-menu-toggle" class="hidden-xs open"><i class="icon-reorder"></i></a>
+			<a class="navbar-brand col-lg-2 col-sm-1 col-xs-12" href="index.html"><span>Smart Vigilance System</span></a>
+			<!-- start: Header Menu -->
+			<div class="nav-no-collapse header-nav">
+				<ul class="nav navbar-nav pull-right">
+
+					<li class="dropdown hidden-xs">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="index.html#">
+							Home
+						</a>
+					</li>
+					<li class="dropdown hidden-xs">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="index.html#">
+							Analytics
+						</a>
+					</li>
+					<li class="dropdown hidden-xs">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="index.html#">
+							Report
+						</a>
+					</li>
+					<li class="dropdown hidden-xs">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="index.html#">
+							Documentation
+						</a>
+					</li>
+					<li class="dropdown">
+						<a class="btn account dropdown-toggle" data-toggle="dropdown" href="index.html#">
+							<div class="avatar"><img src="assets/img/avatar.jpg" alt="Avatar"></div>
+							<div class="user">
+								<span class="hello">Welcome!</span>
+								<span class="name">Hilaal</span>
+							</div>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-menu-title">
+
+							</li>
+							<li><a href="index.html#"><i class="icon-user"></i> Profile</a></li>
+							<li><a href="index.html#"><i class="icon-cog"></i> Settings</a></li>
+							<li><a href="index.html#"><i class="icon-envelope"></i> Messages</a></li>
+							<li><a href="login.html"><i class="icon-off"></i> Logout</a></li>
+						</ul>
+					</li>
+					<!-- end: User Dropdown -->
+				</ul>
+			</div>
+			<!-- end: Header Menu -->
+
+		</div>
+	</header>
+	<!-- end: Header -->
+
+	<div class="container">
+		<div class="row">
+
+			<!-- start: Main Menu -->
+			<div id="sidebar-left" class="col-lg-2 col-sm-1">
+				<input type="text" class="search hidden-sm" placeholder="..." />
+				<div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse">
+					<ul class="nav nav-tabs nav-stacked main-menu">
+						<li><a href="#"><i class="icon-bar-chart"></i><span class="hidden-sm"> Dashboard</span></a></li>
+						<li><a href="#"><i class="icon-eye-open"></i><span class="hidden-sm">Face Recognition</span></a></li>
+						<li><a href="#"><i class="icon-dashboard"></i><span class="hidden-sm"> Waitlist Data</span></a></li>
+						<li><a href="#"><i class="icon-folder-close-alt"></i><span class="hidden-sm">
+									Create_Waitlist_csv</span></a></li>
+						<li><a  href="#"><i class="icon-edit"></i><span class="hidden-sm">Rejected_data</span></a></li>
+						<li><a href="#"><i class="icon-list-alt"></i><span class="hidden-sm">Create_rejectlist_csv</span></a></li>
+						<li><a  href="#"><i class="icon-edit"></i><span class="hidden-sm">Accepted_data</span></a></li>
+						<li><a  href="#"><i class="icon-list-alt"></i><span class="hidden-sm">Create_Acceptedlist_csv</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- end: Main Menu -->
+
+			<!-- start: Content -->
+			<div id="content" class="col-lg-10 col-sm-11">
+				<h1 class="text-center">Welcome To iVigil</h1>
+				<div class="text-center"><img class="site-logo" src="assets/img/zIIoT.png"></div>
+				<div class="text-center"><button class="btn btn-small btn-danger"><i class="icon-camera"></i> Click Face Detection</button></div>
+				
+			</div>
+			<!-- end: Content -->
+
+		</div>
+		<!--/row-->
+
+	</div>
+	<!--/container-->
+
+	<div class="clearfix"></div>
+
+	<footer>
+		<p>
+			<span style="text-align:left;float:left"> </span>
+			<span class="hidden-phone" style="text-align:right;float:right">&copy; 2018 Powered by : <a href="#"
+				 target="_blank" alt="Bootstrap Admin Templates">Qubitor</a></span>
+		</p>
+
+	</footer>
+
+	<!-- start: JavaScript-->
+	<!--[if !IE]>-->
+
+	<script src="assets/js/jquery-2.0.3.min.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="assets/js/jquery-1.10.2.min.js"></script>
+	
+	<![endif]-->
+
+	<!--[if !IE]>-->
+
+	<script type="text/javascript">
+		window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+	</script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+		</script>
+		
+	<![endif]-->
+	<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<!-- page scripts -->
+	<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="assets/js/jquery.sparkline.min.js"></script>
+	<script src="assets/js/fullcalendar.min.js"></script>
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assets/js/excanvas.min.js"></script><![endif]-->
+	<script src="assets/js/jquery.flot.min.js"></script>
+	<script src="assets/js/jquery.flot.pie.min.js"></script>
+	<script src="assets/js/jquery.flot.stack.min.js"></script>
+	<script src="assets/js/jquery.flot.resize.min.js"></script>
+	<script src="assets/js/jquery.flot.time.min.js"></script>
+	<script src="assets/js/jquery.autosize.min.js"></script>
+	<script src="assets/js/jquery.placeholder.min.js"></script>
+
+	<!-- theme scripts -->
+	<script src="assets/js/custom.min.js"></script>
+	<script src="assets/js/core.min.js"></script>
+
+	<!-- inline scripts related to this page -->
+	<script src="assets/js/pages/index.js"></script>
+
+	<!-- end: JavaScript-->
+
+</body>
+<script type="text/javascript">
+      //--------------------
+      // GET USER MEDIA CODE
+      //--------------------
+          navigator.getUserMedia = ( navigator.getUserMedia ||
+                             navigator.webkitGetUserMedia ||
+                             navigator.mozGetUserMedia ||
+                             navigator.msGetUserMedia);
+
+      var video;
+      var webcamStream;
+
+      function startWebcam() {
+        if (navigator.getUserMedia) {
+           navigator.getUserMedia (
+
+              // constraints
+              {
+                 video: true,
+                 audio: false
+              },
+
+              // successCallback
+              function(localMediaStream) {
+                  video = document.querySelector('video');
+                 video.src = window.URL.createObjectURL(localMediaStream);
+                 webcamStream = localMediaStream;
+              },
+
+              // errorCallback
+              function(err) {
+                 console.log("The following error occured: " + err);
+              }
+           );
+        } else {
+           console.log("getUserMedia not supported");
+        }
+      }
+
+
+      //---------------------
+      // TAKE A SNAPSHOT CODE
+      //---------------------
+      var canvas, ctx;
+
+      function init() {
+        // Get the canvas and obtain a context for
+        // drawing in it
+        canvas = document.getElementById("myCanvas");
+        ctx = canvas.getContext('2d');
+      }
+
+      function snapshot() {
+          ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+          var img1 = new Image();
+          img1.src = canvas.toDataURL();
+          var ip = document.getElementById('ip').value;
+          var x = document.getElementById("myAudio");
+          x.play();
+          datad = "{\r\n    \"image\":\"" + img1.src+ "\",\r\n    \"gallery_name\":\"Arti\"\r\n}"
+          var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "https://api.kairos.com/recognize",
+              "method": "POST",
+              "headers": {
+                  "content-type": "application/json",
+                  "app_id": "a35dddca",
+                  "app_key": "5cfb11153751358553524c3807253f1d",
+                  "cache-control": "no-cache"
+              },
+              "processData": false,
+              "data": datad
+          }
+          $.ajax(settings).done(function (response) {
+              var m = response;
+              console.log(JSON.stringify(m).indexOf("success"));
+              if(JSON.stringify(m).indexOf("success") > -1) {
+                  Materialize.toast('User Identfied. Name : ' +JSON.stringify(m.images[0].candidates[0].subject_id), 6000);
+                  console.log(m.images[0].candidates[0].subject_id);
+              }
+              else{
+                  Materialize.toast('User Not identified');
+              }
+          });
+      }
+  </script>
+
+</html>

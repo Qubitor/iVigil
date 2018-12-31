@@ -1,0 +1,10 @@
+{% if data %}
+{% for i in data %}
+{% if i.id != "user_id" %}
+user ID:<b>{{i.id}}</b><br>
+<img height='30%' widht='30%'src="http://{{ip}}:{{port}}/static/img_data/accept_list/{{i.id}}.jpg">
+<hr>
+{% endif %}
+{% endfor %}
+
+{% endif %}
