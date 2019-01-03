@@ -1,5 +1,7 @@
-﻿
 
+<head>
+    <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7dP3FPdyULLwP7DET-WlrgUF0ilrBvFLaNv0S6AF3vB9mOJ_RvQ">
+</head>
 
 {% if data %}
 {% for i in data %}
@@ -11,6 +13,8 @@ user ID:<b>{{i.id}}</b><br>
 <img height='30%' widht='30%'src="http://{{ip}}:{{port}}/static/img_data/wait_list/{{i.id}}.jpg">
 <button class="button button1"><a style="text-decoration:none" href="http://{{ip}}:{{port}}/sample/accept/{{i.id}}">Accept</a></button>
 <button class="button button3"><a style="text-decoration:none"  href="http://{{ip}}:{{port}}/sample/reject/{{i.id}}">Reject</a></button>
+<!-- <button class="button button3"><a style="text-decoration:none"  href="http://{{ip}}:{{port}}/sample/cans/">ignore</a></button> -->
+<button class="button button5"><a style="text-decoration:none"  href="http://{{ip}}:{{port}}/sample/cans/{{i.id}}">Ignore</a></button>
 
 
 <hr>
@@ -64,5 +68,16 @@ user ID:<b>{{i.id}}</b><br>
     color: white;
 }
 
+
+.button5 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #FFA500;
+}
+
+.button5:hover {
+    background-color:#FFA500 ;
+    color: white;
+}
 
 </style>

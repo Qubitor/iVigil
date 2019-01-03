@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from django.shortcuts import render,HttpResponse
 from collections import Counter
 from django.http import HttpResponse
 from django.http import StreamingHttpResponse
@@ -15,6 +15,7 @@ import csv
 import sys
 import numpy
 face_cascade=cv2.CascadeClassifier('sample/static/opencv/haarcascade_frontalface_default.xml')
+ip = "192.168.10.26"
 
 accepted_face_data = []
 accepted_name_list = []
@@ -46,6 +47,7 @@ for i in range(1,len(lines)):
 #     for k in en:
 #         data.append(float(k))
 #     waiting_face_data.append(data)
+red=[]
 for img in glob.glob("sample/static/img_data/wait_list/*.jpg"):
     # Load a sample picture and learn how to recognize it.
     image = face_recognition.load_image_file(img)
@@ -56,7 +58,7 @@ for img in glob.glob("sample/static/img_data/wait_list/*.jpg"):
     r=user_name
     waiting_name_list.append(user_name)
     red=waiting_name_list
-    # print(waiting_name_list)
+    print(waiting_name_list)
 
 
     # print("***********************")
@@ -135,6 +137,8 @@ def stream_response_generator():
                     if True in match:
                         first_match_index = match.index(True)
                         name = rejected_name_list[first_match_index]
+                        # print("$$$$$$$$$$$$$")
+                        # print(name)
                     else:
                         for face_encoding in face_encodings:
                             match = face_recognition.compare_faces(waiting_face_data, face_encoding, tolerance=0.60)
@@ -142,6 +146,8 @@ def stream_response_generator():
                             if True in match:
                                 first_match_index = match.index(True)
                                 name = waiting_name_list[first_match_index]
+                                # print("*************")
+                                # print(name)
                             else:
                                 gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
                                 faces=face_cascade.detectMultiScale(gray,1.3,5)
@@ -259,8 +265,6 @@ def stream_response_generator():
                         readFile.close()
                         writeFile.close()                                
             face_names.append(name)
-            print("***********************************")
-            print()
             for (top, right, bottom, left), name in zip(face_locations, face_names):
                 
                 if not name:
@@ -328,8 +332,19 @@ def stream_response_generator():
             readFile.close()
             writeFile.close()
             print("^^^^^^^^^^^^")
-
-                # waiting_name_list.remove("wid_")
+            # del red[0]
+            # red.append('obama' )
+            
+            # directory='sample/static/img_data/wait_list/'
+            # for i in glob.glob(os.path.join(directory,"*.jpg")):
+            #     os.remove(i)
+            # print(red)
+                
+            # os.remove('sample/static/trained_data/waiting_list.csv')
+            # s=[['user_id', ' 1',' 2',' 3',' 4',' 5',' 6',' 7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31',' 32',  '33',  '34',  '35',  '36',  '37',  '38', '39','40',  '41',  '42', ' 43', ' 44' ,' 45' , '46',  '47',  '48',  '49',  '50',  '51',  '52',  '53',  '54',  '55',  '56', ' 57',  '58' , '59',  '60',  '61',  '62',  '63',  '64',  '65',  '66' , '67' , '68' , '69',  '70' , '71',  '72',  '73' , '74',  '75' , '76',  '77',  '78',  '79',  '80',  '81',  '82',  '83',  '84', ' 85',  '86',  '87',  '88',  '89',  '90', ' 91',  '92',  '93',  '94'  ,'95',  '96' , '97',  '98',  '99' , '100', '101', '102', '103', '104', '105', '106' ,'107' ,'108 ','109' ,'110', '111', '112', '113' ,'114', '115', '116', '117', '118','119', '120', '121', '122', '123', '124', '125', '126', '127', '128']]
+            # with open('sample/static/trained_data/waiting_list.csv', 'w') as f:
+            #     writer = csv.writer(f)
+            #     writer.writerows(s)
         else:
             pass
         # # i+=1
@@ -351,9 +366,9 @@ def accept(request,user_id):
     id ="aid_"+str(ts)
     new_file='sample/static/img_data/accept_list/'+id+'.jpg'
     shutil.copy2(old_file, new_file)
-    os.remove(old_file)
     name=new_file.split('/')
     user_name, ext = os.path.splitext(name[4])
+    os.remove(old_file)
     for i in range(0,len(waiting_name_list)):
         if(waiting_name_list[i]==s):
             waiting_name_list[i]=user_name
@@ -367,9 +382,6 @@ def accept(request,user_id):
         writer = csv.writer(csvFile)
         writer.writerow(row)
     csvFile.close()
-    print('*'*60)
-    print("a New User is Accepted with id "+ str(user_name) +" by *admin* ")
-    print('*'*60)
     data=[{'message':user_id+" is Accepted Successfully"}]
     return HttpResponse(json.dumps(data), content_type="application/json")
 
@@ -392,6 +404,7 @@ def waiting_list(request):
 import json
 def reject(request,user_id):
     s=user_id
+    print(s)
     user_id=user_id[4:]
     import pandas as pd
     df = pd.read_csv("sample/static/trained_data/waiting_list.csv")
@@ -421,7 +434,8 @@ def reject(request,user_id):
         writer.writerow(row)
     csvFile.close()
     data=[{'message':user_id+" is Rejected Successfully"}]
-    return HttpResponse(json.dumps(data), content_type="application/json")
+    return HttpResponse(json.dumps(data), content_type="application/json") 
+
 
 
 
@@ -432,7 +446,7 @@ def notifi_data(request):
     data=reversed(data)
     for i in data:
         if (i !="sample" and i !="file-moved" and i !="user_id" ):
-            a={'id':i,'image':'http://192.168.10.26:8000/static/img_data/wait_list/'+str(i)+'.jpg'}
+            a={'id':i,'image':'http://'+ip+':8000/static/img_data/wait_list/'+str(i)+'.jpg'}
             waiting_list.append(a)
     return HttpResponse(json.dumps(waiting_list), content_type="application/json")
 
@@ -478,7 +492,7 @@ def accept_api(request):
         data=reversed(data)
         for i in data:
             if (i !="user_id" ):
-                a={'id':i,'image':'http://192.168.10.26:8000/static/img_data/accept_list/'+str(i)+'.jpg'}
+                a={'id':i,'image':'http://'+ip+':8000/static/img_data/accept_list/'+str(i)+'.jpg'}
                 accept_list.append(a)
         return HttpResponse(json.dumps(accept_list), content_type="application/json")
 
@@ -489,7 +503,7 @@ def rej_api(request):
         data=reversed(data)
         for i in data:
             if (i !="user_id" ):
-                a={'id':i,'image':'http://192.168.10.26:8000/static/img_data/reject_list/'+str(i)+'.jpg'}
+                a={'id':i,'image':'http://'+ip+':8000/static/img_data/reject_list/'+str(i)+'.jpg'}
                 reject_list.append(a)
         return HttpResponse(json.dumps(reject_list), content_type="application/json")
 
@@ -576,4 +590,63 @@ def generate(request):
         writer = csv.writer(f)
         writer.writerows(s)
         qw=[{'message':" is create_accepted_list_csv Successfully"}]
-    return HttpResponse(json.dumps(qw), content_type="application/json")                
+    return HttpResponse(json.dumps(qw), content_type="application/json")       
+
+
+def gallery(request):
+
+    
+    return render(request,'gallery.html')
+
+def Accept(request):
+    e=[]
+    with open('sample/static/trained_data/accepted_list.csv') as f: 
+        data=[line.split(",")[0] for line in f]
+         
+    if(data):
+        data=reversed(data)
+        for i in data:
+            a={'id':i}
+            e.append(a)
+        return render(request,'accept_list.html',{'data':e,'ip':local_ip,'port':port})
+    
+
+def Reject(request):
+    w=[]
+    with open('sample/static/trained_data/rejected_list.csv') as f: 
+        data=[line.split(",")[0] for line in f]
+         
+    if(data):
+        data=reversed(data)
+        for i in data:
+            a={'id':i}
+            w.append(a)
+        return render(request,'reject_list.html',{'data':w,'ip':local_ip,'port':port})
+    
+
+def Waiting(request):
+    df=[]
+   
+    with open('sample/static/trained_data/waiting_list.csv') as f: 
+        data=[line.split(",")[0] for line in f]
+         
+    if(data):
+        data=reversed(data)
+        for i in data:
+            a={'id':i}
+            df.append(a)
+        return render(request,'waiting_list.html',{'data':df,'ip':local_ip,'port':port})
+
+
+def cans(request,user_id):
+    sa=user_id
+    print(sa)
+    user_id=user_id[4:]
+    import pandas as pd
+    df = pd.read_csv("sample/static/trained_data/waiting_list.csv")
+    df.loc[df["user_id"]==sa, "user_id"] = 'file-moved'
+    df.to_csv("sample/static/trained_data/waiting_list.csv", index=False)
+    old_file='sample/static/img_data/wait_list/'+"wid_"+str(user_id)+'.jpg'
+    os.remove(old_file)
+    a=[{'message':user_id+" is Delete Successfully"}]
+    return HttpResponse(json.dumps(a), content_type="application/json") 

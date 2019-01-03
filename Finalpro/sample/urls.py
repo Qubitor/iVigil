@@ -7,6 +7,7 @@ urlpatterns = [
 	url(r'^accept/(\w+)/', views.accept, name="accept"),
 	url(r'^reject/(\w+)/', views.reject, name="reject"),
 	url(r'^waiting_list',views.waiting_list,name="waiting_list"),
+	url(r'^cans/(\w+)/',views.cans,name="cans"),
 	url(r'^delete',views.delete,name="delete"),
 	url(r'^create',views.create,name="create"),
 	url(r'^clear',views.clear,name="clear"),
@@ -23,5 +24,10 @@ urlpatterns = [
 	url(r'^sam',views.sam,name="sam"),
 	url(r'^test',views.test,name="test"),
 	url(r'^rev',views.rev,name="rev"),
+	url(r'^gallery',views.gallery,name='gallery'),
+	url(r'^Accept',views.Accept,name='Accept'),
+	url(r'^Reject',views.Reject,name='Reject'),
+	url(r'^Waiting',views.Waiting,name='Waiting'),
+
 
 ]
