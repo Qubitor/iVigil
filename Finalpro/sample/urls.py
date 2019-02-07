@@ -23,6 +23,7 @@ urlpatterns = [
 	url(r'^test',views.test,name="test"),
 	url(r'^rev',views.rev,name="rev"),
 	url(r'^gallery',views.gallery,name='gallery'),
+	url(r'^video',views.video,name='video'),
 	url(r'^Accept',views.Accept,name='Accept'),
 	url(r'^Reject',views.Reject,name='Reject'),
 	url(r'^Waiting',views.Waiting,name='Waiting'),

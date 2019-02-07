@@ -22,7 +22,7 @@ import pandas as pd
 import shutil
 import json
 face_cascade=cv2.CascadeClassifier('sample/static/opencv/haarcascade_frontalface_default.xml')
-ip = "192.168.10.26"
+ip = "192.168.10.13"
 
 accepted_face_data = []
 accepted_name_list = []
@@ -31,6 +31,7 @@ waiting_name_list = []
 rejected_face_data = []
 rejected_name_list = []
 #
+print(accepted_face_data)
 with open('sample/static/trained_data/accepted_list.csv', 'r') as readFile:
     reader = csv.reader(readFile)
     lines = list(reader)
@@ -42,17 +43,8 @@ for i in range(1,len(lines)):
     for k in en:
         data.append(float(k))
     accepted_face_data.append(data)
-# with open('sample/static/trained_data/waiting_list.csv', 'r') as readFile:
-#     reader = csv.reader(readFile)
-#     lines = list(reader)
-# for i in range(1,len(lines)):
-#     data=lines[i]
-#     waiting_name_list.append(data[0])
-#     en=data[1:]
-#     data=[]
-#     for k in en:
-#         data.append(float(k))
-#     waiting_face_data.append(data)
+    # print(accepted_face_data)
+
 red=[]
 for img in glob.glob("sample/static/img_data/wait_list/*.jpg"):
     # Load a sample picture and learn how to recognize it.
@@ -60,8 +52,10 @@ for img in glob.glob("sample/static/img_data/wait_list/*.jpg"):
     data = face_recognition.face_encodings(image)[0]
     waiting_face_data.append(data)
     name=img.split('/')
+    
     user_name, ext = os.path.splitext(name[4])
     r=user_name
+    
     waiting_name_list.append(user_name)
     red=waiting_name_list
 
@@ -143,7 +137,7 @@ def stream_response_generator():
                                     face_locations = face_recognition.face_locations(fram)
                                     face_encodings = face_recognition.face_encodings(fram, face_locations)
                             #end..        
-
+ 
                                     #check waiting list data:
                                     for face_encoding in face_encodings:
                                         match = face_recognition.compare_faces(waiting_face_data, face_encoding, tolerance=0.40)
@@ -241,10 +235,10 @@ def stream_response_generator():
                     continue
                 if('wid_'in name):
                     c=(0,165,255)
-                elif('aid_'in name):
-                    c=(34,139,34)
+                elif('rjd_'in name):
+                    c=(0, 0, 255)
                 else:
-                    c= (0, 0, 255)
+                    c= (34,139,34)
                 #end    
 
                 #rectangle frame and text will appear:
@@ -272,7 +266,7 @@ def stream_response_generator():
 
             readFile.close()
             writeFile.close()
-            print("******************")
+            # print("******************")
             q=('w',0)
             test=[q]
             with open('sample/static/trained_data/test.csv', 'r') as readFile:
@@ -305,7 +299,7 @@ def stream_response_generator():
 #end of video capture:
 
 #accept id function:
-def accept(request,user_id):
+def accept(request,user_id):   
     s=user_id
     user_id=user_id[4:]
 # wait list csv file has been moved
@@ -315,7 +309,7 @@ def accept(request,user_id):
     #waiting image file move to accept folder:
     old_file='sample/static/img_data/wait_list/'+"wid_"+str(user_id)+'.jpg'
     ts = int(time.time())
-    id ="aid_"+str(ts)
+    id ="aid"+str(ts)
     #copy old file and move to new file process: 
     new_file='sample/static/img_data/accept_list/'+id+'.jpg'
     shutil.copy2(old_file, new_file)
@@ -373,6 +367,7 @@ def reject(request,user_id):
     shutil.copy2(old_file, new_file)
     name=new_file.split('/')
     user_name, ext = os.path.splitext(name[4])
+    # print(user_name)
     #delete file process:
     os.remove(old_file)
     
@@ -567,3 +562,8 @@ def cans(request,user_id):
     os.remove(old_file)
     a=[{'message':user_id+" is Delete Successfully"}]
     return HttpResponse(json.dumps(a), content_type="application/json") 
+
+def video(request):   
+    qqq=[]
+    return render(request,'video1111.html',{'data':qqq,'ip':local_ip,'port':port})
+
