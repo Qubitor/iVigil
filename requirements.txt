@@ -178,7 +178,7 @@ ply==3.11
 post==1.0.2
 preshed==2.0.1
 prompt-toolkit==1.0.14
-protobuf==3.6.1
+protobuf==3.15.0
 ptyprocess==0.6.0
 public==1.0.3
 py==1.4.34
