@@ -211,7 +211,7 @@ python-crfsuite==0.9.6
 python-dateutil==2.7.4
 python-debian==0.1.32
 python-engineio==2.3.2
-python-jwt==2.0.1
+python-jwt==3.3.4
 python-nmap==0.6.1
 python-socketio==2.0.0
 python-telegram-bot==10.1.0
